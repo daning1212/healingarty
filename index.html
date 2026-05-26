@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HealingArty - Photographer & Media Artist</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HealingArty | Creative Media Studio</title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <!-- Navigation -->
+
+    <div class="cursor-glow"></div>
+
     <nav class="navbar">
-        <div class="container">
+        <div class="container nav-container">
             <div class="logo">HEALINGARTY</div>
+
             <ul class="nav-links">
                 <li><a href="#home">HOME</a></li>
                 <li><a href="#portfolio">PORTFOLIO</a></li>
@@ -21,233 +24,145 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="hero-bg"></div>
+
         <div class="hero-content">
+            <p class="hero-mini">DIGITAL MEDIA STUDIO</p>
             <h1 class="hero-title">HEALINGARTY</h1>
-            <p class="hero-subtitle">Photographer & Media Artist</p>
-            <p class="hero-description">영상, 사진, VFX, AI를 통해 당신의 이야기를 시각적으로 표현합니다</p>
-            <a href="#services" class="cta-button">서비스 보기</a>
+
+            <div class="typing-wrap">
+                <span id="typing-text"></span>
+            </div>
+
+            <p class="hero-description">
+                영상, 사진, AI 아트, VFX를 조합해 감정이 살아있는 시각 경험을 만듭니다.
+            </p>
+
+            <a href="#portfolio" class="cta-button">포트폴리오 보기</a>
         </div>
-        <div class="hero-overlay"></div>
+
+        <div class="floating-orb orb1"></div>
+        <div class="floating-orb orb2"></div>
     </section>
 
-    <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio">
         <div class="container">
             <h2 class="section-title">PORTFOLIO</h2>
-            <p class="section-subtitle">사진과 미디어 아트 작품</p>
-            
+            <p class="section-subtitle">Creative Works & Experimental Media</p>
+
             <div class="portfolio-grid">
-                <!-- Photography -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);">
-                        <div class="portfolio-overlay">
-                            <h3>Photography</h3>
-                            <p>고화질 사진 촬영</p>
-                        </div>
+
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200&auto=format&fit=crop" alt="Photography">
+                    <div class="portfolio-overlay">
+                        <h3>Photography</h3>
+                        <p>Cinematic portrait & visual storytelling</p>
                     </div>
                 </div>
 
-                <!-- Video Production -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #f7931e 0%, #fdb913 100%);">
-                        <div class="portfolio-overlay">
-                            <h3>Video Production</h3>
-                            <p>4K 영상 제작</p>
-                        </div>
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?q=80&w=1200&auto=format&fit=crop" alt="Video">
+                    <div class="portfolio-overlay">
+                        <h3>Video Production</h3>
+                        <p>4K cinematic production</p>
                     </div>
                 </div>
 
-                <!-- VFX & Editing -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #fdb913 0%, #ff6b35 100%);">
-                        <div class="portfolio-overlay">
-                            <h3>VFX & Editing</h3>
-                            <p>전문 영상 편집</p>
-                        </div>
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" alt="AI">
+                    <div class="portfolio-overlay">
+                        <h3>AI Creative</h3>
+                        <p>AI generated visual experiments</p>
                     </div>
                 </div>
 
-                <!-- Media Art -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);">
-                        <div class="portfolio-overlay">
-                            <h3>Media Art</h3>
-                            <p>창의적 미디어 아트</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AI Creative -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #f7931e 0%, #fdb913 100%);">
-                        <div class="portfolio-overlay">
-                            <h3>AI Creative</h3>
-                            <p>AI 기술 활용 콘텐츠</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PD Services -->
-                <div class="portfolio-item">
-                    <div class="portfolio-image" style="background: linear-gradient(135deg, #fdb913 0%, #ff6b35 100%);">
-                        <div class="portfolio-overlay">
-                            <h3>PD Services</h3>
-                            <p>프로듀싱 & 기획</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="youtube-section">
-                <h3>YouTube 포트폴리오</h3>
-                <p>더 많은 작품은 YouTube에서 확인하세요</p>
-                <a href="https://www.youtube.com/@healingArty" target="_blank" class="youtube-button">YouTube 채널 방문</a>
-            </div>
-
-            <div class="instagram-section">
-                <h3>Instagram 포트폴리오</h3>
-                <p>최신 작품과 일상은 Instagram에서 확인하세요</p>
-                <a href="https://www.instagram.com/healing_arty" target="_blank" class="instagram-button">Instagram 팔로우</a>
-                <div class="instagram-feed">
-                    <p style="text-align: center; color: var(--text-gray); margin-top: 2rem;">Instagram 피드는 앱에서 직접 확인해주세요</p>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
             <h2 class="section-title">SERVICES</h2>
-            <p class="section-subtitle">제공하는 서비스</p>
-            
+
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">📷</div>
-                    <h3>사진 촬영</h3>
-                    <p>전문적인 사진 촬영 및 보정. 상업 사진, 포트레이트, 제품 사진 등 다양한 분야의 촬영 서비스를 제공합니다.</p>
-                </div>
 
-                <div class="service-card">
+                <div class="service-card reveal">
                     <div class="service-icon">🎬</div>
-                    <h3>영상 제작</h3>
-                    <p>4K 고화질 영상 촬영 및 제작. 광고, 다큐멘터리, 뮤직비디오 등 모든 종류의 영상 제작이 가능합니다.</p>
+                    <h3>Video Production</h3>
+                    <p>광고, 뮤직비디오, 시네마틱 영상 제작.</p>
                 </div>
 
-                <div class="service-card">
-                    <div class="service-icon">✨</div>
-                    <h3>VFX & 편집</h3>
-                    <p>전문적인 영상 편집 및 VFX 작업. 색감 보정, 모션 그래픽, 특수 효과 등을 통해 완성도 높은 결과물을 제공합니다.</p>
+                <div class="service-card reveal">
+                    <div class="service-icon">📸</div>
+                    <h3>Photography</h3>
+                    <p>브랜드와 감정을 담는 고화질 촬영.</p>
                 </div>
 
-                <div class="service-card">
-                    <div class="service-icon">🎨</div>
-                    <h3>미디어 아트</h3>
-                    <p>창의적인 미디어 아트 작품 제작. 설치미술, 인터랙티브 아트, 디지털 아트 등 새로운 형태의 예술 작품을 만듭니다.</p>
-                </div>
-
-                <div class="service-card">
+                <div class="service-card reveal">
                     <div class="service-icon">🤖</div>
-                    <h3>AI 기술 활용</h3>
-                    <p>최신 AI 기술을 활용한 창의적 콘텐츠 제작. AI 이미지 생성, 자동 편집, 스마트 효과 등을 통해 혁신적인 결과물을 만듭니다.</p>
+                    <h3>AI Visual Art</h3>
+                    <p>AI 기반의 실험적 콘텐츠와 아트워크 제작.</p>
                 </div>
 
-                <div class="service-card">
-                    <div class="service-icon">🎯</div>
-                    <h3>PD & 기획</h3>
-                    <p>프로젝트 기획 및 프로듀싱. 콘셉트 개발부터 최종 완성까지 전체 프로세스를 관리하고 진행합니다.</p>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">ABOUT</h2>
-            <p class="section-subtitle">HealingArty에 대해</p>
-            
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>전문가 팀</h3>
-                    <p>HealingArty는 사진사, 영상 제작자, VFX 전문가, 미디어 아티스트, AI 전문가로 구성된 크리에이티브 팀입니다. 각 분야의 전문성을 바탕으로 고품질의 시각 콘텐츠를 제작합니다.</p>
-                    
-                    <h3>우리의 철학</h3>
-                    <p>우리는 단순한 영상이나 사진이 아닌, 감정과 메시지를 담은 작품을 만듭니다. 최신 기술과 창의성을 결합하여 당신의 이야기를 가장 아름답고 효과적으로 표현합니다.</p>
-                    
-                    <h3>경험</h3>
-                    <p>다양한 프로젝트를 통해 축적된 경험과 노하우를 바탕으로, 광고, 다큐멘터리, 뮤직비디오, 기업 영상, 미디어 아트 등 모든 분야의 작업을 성공적으로 완료했습니다.</p>
+        <div class="container about-content">
+            <div class="about-text reveal">
+                <h2 class="section-title left">ABOUT</h2>
+
+                <p>
+                    HealingArty는 영상과 AI, 감성과 기술을 연결하는 디지털 창작 스튜디오입니다.
+                </p>
+
+                <p>
+                    단순한 결과물이 아니라 기억에 남는 분위기와 감정을 설계합니다.
+                </p>
+            </div>
+
+            <div class="stats reveal">
+                <div class="stat-box">
+                    <h3>299+</h3>
+                    <span>Projects</span>
                 </div>
-                
-                <div class="about-stats">
-                    <div class="stat">
-                        <div class="stat-number">299+</div>
-                        <div class="stat-label">작품</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">4K</div>
-                        <div class="stat-label">고화질</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">6+</div>
-                        <div class="stat-label">전문 분야</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">만족도</div>
-                    </div>
+
+                <div class="stat-box">
+                    <h3>4K</h3>
+                    <span>Cinematic</span>
+                </div>
+
+                <div class="stat-box">
+                    <h3>AI</h3>
+                    <span>Creative Lab</span>
+                </div>
+
+                <div class="stat-box">
+                    <h3>24/7</h3>
+                    <span>Ideas Running</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title">CONTACT</h2>
-            <p class="section-subtitle">문의 및 상담</p>
-            
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>연락처</h3>
-                    <p>프로젝트 상담, 견적 문의, 협업 제안 등 언제든지 연락주세요.</p>
-                    
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <span class="contact-label">이메일:</span>
-                            <a href="mailto:sadwar1001@gmail.com">sadwar1001@gmail.com</a>
-                        </div>
-                        <div class="contact-item">
-                            <span class="contact-label">YouTube:</span>
-                            <a href="https://www.youtube.com/@healingArty" target="_blank">@healingArty</a>
-                        </div>
-                        <div class="contact-item">
-                            <span class="contact-label">SNS:</span>
-                            <a href="#" target="_blank">Instagram</a> | 
-                            <a href="#" target="_blank">Facebook</a>
-                        </div>
-                    </div>
-                </div>
 
-                <form class="contact-form">
-                    <input type="text" placeholder="이름" required>
-                    <input type="email" placeholder="이메일" required>
-                    <input type="text" placeholder="제목" required>
-                    <textarea placeholder="메시지" rows="5" required></textarea>
-                    <button type="submit" class="submit-button">전송</button>
-                </form>
-            </div>
+            <form class="contact-form reveal">
+                <input type="text" placeholder="이름" required />
+                <input type="email" placeholder="이메일" required />
+                <textarea rows="5" placeholder="메시지"></textarea>
+
+                <button type="submit" class="submit-button">SEND MESSAGE</button>
+            </form>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 HealingArty. All rights reserved.</p>
-            <p>Photographer & Media Artist | Video Production | VFX | AI Creative</p>
-        </div>
+        <p>© 2026 HealingArty | Creative Media Studio</p>
     </footer>
 
     <script src="script.js"></script>
