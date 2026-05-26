@@ -1,134 +1,185 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>HealingArty</title>
-<link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HealingArty | Creative Media Studio</title>
+    <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<header class="header">
-    <div class="logo">HEALINGARTY</div>
+    <div class="cursor-glow"></div>
 
-    <nav>
-        <a href="#work">WORK</a>
-        <a href="#about">ABOUT</a>
-        <a href="#contact">CONTACT</a>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">HEALINGARTY</div>
+
+            <ul class="nav-links">
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#portfolio">PORTFOLIO</a></li>
+                <li><a href="#services">SERVICES</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </div>
     </nav>
-</header>
+<div class="social-section reveal">
 
-<section class="hero">
-
-    <div class="hero-overlay"></div>
-
-    <div class="hero-text">
-        <p class="mini-text">VISUAL MEDIA STUDIO</p>
-
-        <h1>
-            HEALING<br>
-            ARTY
-        </h1>
-
-        <p class="hero-desc">
-            영상, 사진, AI, VFX를 기반으로<br>
-            감정과 분위기를 시각적으로 설계합니다.
-        </p>
-    </div>
-
-</section>
-
-<section class="work" id="work">
-
-    <div class="work-item reveal">
-        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1400&auto=format&fit=crop">
-
-        <div class="work-info">
-            <h2>Cinematic Portrait</h2>
-            <p>PHOTOGRAPHY · VISUAL MOOD</p>
-        </div>
-    </div>
-
-    <div class="work-item reveal">
-        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400&auto=format&fit=crop">
-
-        <div class="work-info">
-            <h2>AI Creative</h2>
-            <p>AI GENERATED VISUALS</p>
-        </div>
-    </div>
-
-    <div class="work-item reveal">
-        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop">
-
-        <div class="work-info">
-            <h2>Media Atmosphere</h2>
-            <p>FILM · COLOR · STORY</p>
-        </div>
-    </div>
-
-</section>
-
-<section class="about" id="about">
-
-    <div class="about-left reveal">
-        <p class="section-mini">ABOUT</p>
-
-        <h2>
-            Visual storytelling<br>
-            with emotion & atmosphere.
-        </h2>
-    </div>
-
-    <div class="about-right reveal">
-        <p>
-            HealingArty는 영상, 사진, AI 기술을 결합하여
-            새로운 분위기의 비주얼 콘텐츠를 제작합니다.
-        </p>
-
-        <p>
-            감정과 공간, 색감과 몰입감을 중심으로
-            시네마틱한 경험을 디자인합니다.
-        </p>
-    </div>
-
-</section>
-
-<section class="contact" id="contact">
-
-    <p class="section-mini reveal">CONTACT</p>
-
-    <h2 class="reveal">
-        Let's build<br>
-        something atmospheric.
-    </h2>
-
-    <a href="mailto:sadwar1001@gmail.com"
-       class="mail reveal">
-       sadwar1001@gmail.com
+    <a href="https://www.youtube.com/@healingArty"
+       target="_blank"
+       class="social-button youtube">
+       🎬 YouTube
     </a>
 
-    <div class="social reveal">
+    <a href="https://www.instagram.com/healing_arty"
+       target="_blank"
+       class="social-button instagram">
+       📸 Instagram
+    </a>
 
-        <a href="https://www.youtube.com/@healingArty"
-           target="_blank">
-           YOUTUBE
-        </a>
+</div>
 
-        <a href="https://www.instagram.com/healing_arty"
-           target="_blank">
-           INSTAGRAM
-        </a>
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
 
-    </div>
+        <div class="hero-content">
+            <p class="hero-mini">DIGITAL MEDIA STUDIO</p>
+            <h1 class="hero-title">HEALINGARTY</h1>
 
-</section>
+            <div class="typing-wrap">
+                <span id="typing-text"></span>
+            </div>
 
-<footer>
-    © 2026 HealingArty
-</footer>
+            <p class="hero-description">
+                영상, 사진, AI 아트, VFX를 조합해 감정이 살아있는 시각 경험을 만듭니다.
+            </p>
 
-<script src="script.js"></script>
+            <a href="#portfolio" class="cta-button">포트폴리오 보기</a>
+        </div>
 
+        <div class="floating-orb orb1"></div>
+        <div class="floating-orb orb2"></div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">PORTFOLIO</h2>
+            <p class="section-subtitle">Creative Works & Experimental Media</p>
+
+            <div class="portfolio-grid">
+
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200&auto=format&fit=crop" alt="Photography">
+                    <div class="portfolio-overlay">
+                        <h3>Photography</h3>
+                        <p>Cinematic portrait & visual storytelling</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?q=80&w=1200&auto=format&fit=crop" alt="Video">
+                    <div class="portfolio-overlay">
+                        <h3>Video Production</h3>
+                        <p>4K cinematic production</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item reveal">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop" alt="AI">
+                    <div class="portfolio-overlay">
+                        <h3>AI Creative</h3>
+                        <p>AI generated visual experiments</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">SERVICES</h2>
+
+            <div class="services-grid">
+
+                <div class="service-card reveal">
+                    <div class="service-icon">🎬</div>
+                    <h3>Video Production</h3>
+                    <p>광고, 뮤직비디오, 시네마틱 영상 제작.</p>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon">📸</div>
+                    <h3>Photography</h3>
+                    <p>브랜드와 감정을 담는 고화질 촬영.</p>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon">🤖</div>
+                    <h3>AI Visual Art</h3>
+                    <p>AI 기반의 실험적 콘텐츠와 아트워크 제작.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container about-content">
+            <div class="about-text reveal">
+                <h2 class="section-title left">ABOUT</h2>
+
+                <p>
+                    HealingArty는 영상과 AI, 감성과 기술을 연결하는 디지털 창작 스튜디오입니다.
+                </p>
+
+                <p>
+                    단순한 결과물이 아니라 기억에 남는 분위기와 감정을 설계합니다.
+                </p>
+            </div>
+
+            <div class="stats reveal">
+                <div class="stat-box">
+                    <h3>299+</h3>
+                    <span>Projects</span>
+                </div>
+
+                <div class="stat-box">
+                    <h3>4K</h3>
+                    <span>Cinematic</span>
+                </div>
+
+                <div class="stat-box">
+                    <h3>AI</h3>
+                    <span>Creative Lab</span>
+                </div>
+
+                <div class="stat-box">
+                    <h3>24/7</h3>
+                    <span>Ideas Running</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">CONTACT</h2>
+
+            <form class="contact-form reveal">
+                <input type="text" placeholder="이름" required />
+                <input type="email" placeholder="이메일" required />
+                <textarea rows="5" placeholder="메시지"></textarea>
+
+                <button type="submit" class="submit-button">SEND MESSAGE</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>© 2026 HealingArty | Creative Media Studio</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
