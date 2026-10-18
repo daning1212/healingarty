@@ -23,10 +23,10 @@
 - [Random LoRA Loader](https://github.com/daning1212/HealingArty-Random-LoRA-Loader) — ComfyUI LoRA 선택 노드
 - [ARTA MATRYOSHKA](https://github.com/daning1212/ARTA-MATRYOSHKA) — 다층 방어 연구 프로토타입
 
-- [Healingarty Image Browser](https://github.com/daning1212/Healinagarty-picture-brower-Drag-and-Drop) — 캔버스의 폴더 트리에서 기존 Load Image로 이미지를 드래그하는 ComfyUI 노드
+- [Healingarty Image Browser](https://github.com/daning1212/Healingarty-Image-Browser-Drag-Drop-Select) — 드래그 또는 클릭 선택으로 이미지를 연결하는 ComfyUI 노드 — Drag, Drop & Select
 
 ### Image Browser 미리보기
 
-[![Healingarty Image Browser](https://raw.githubusercontent.com/daning1212/Healinagarty-picture-brower-Drag-and-Drop/main/docs/image-browser-preview.png)](https://github.com/daning1212/Healinagarty-picture-brower-Drag-and-Drop)
+[![Healingarty Image Browser](https://raw.githubusercontent.com/daning1212/Healingarty-Image-Browser-Drag-Drop-Select/main/docs/image-browser-preview.png)](https://github.com/daning1212/Healingarty-Image-Browser-Drag-Drop-Select)
 
-폴더 트리 유지, 현재 위치 강조, 썸네일 크기 조절, 검색과 즐겨찾기를 지원합니다. [설치 및 사용 안내](https://github.com/daning1212/Healinagarty-picture-brower-Drag-and-Drop#설치)
+폴더 트리 유지, 현재 위치 강조, 썸네일 크기 조절, 검색과 즐겨찾기를 지원합니다. [설치 및 사용 안내](https://github.com/daning1212/Healingarty-Image-Browser-Drag-Drop-Select#설치)
