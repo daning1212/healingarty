@@ -14,7 +14,7 @@
 - [Instagram](https://www.instagram.com/healing_arty)
 
 ### 직접 만든 도구
-홈페이지의 ‘만든 도구’ 코너에서 여섯 프로젝트를 소개합니다.
+홈페이지의 ‘만든 도구’ 코너에서 일곱 프로젝트를 소개합니다.
 
 - [DRAG · CROP · SAVE](https://github.com/daning1212/DRAG-CROP-SAVE) — 드래그로 영상 화면을 잘라 저장하는 로컬 도구
 - [Prompt Randomizer](https://github.com/daning1212/HealingaArty_prompt_randomizer) — ComfyUI 프롬프트 조합 노드
@@ -22,3 +22,11 @@
 - [Head Crop](https://github.com/daning1212/Single-Called-Head-Crop) — 얼굴·머리 중심 이미지 크롭
 - [Random LoRA Loader](https://github.com/daning1212/HealingArty-Random-LoRA-Loader) — ComfyUI LoRA 선택 노드
 - [ARTA MATRYOSHKA](https://github.com/daning1212/ARTA-MATRYOSHKA) — 다층 방어 연구 프로토타입
+
+- [Healingarty Image Browser](https://github.com/daning1212/Healinagarty-picture-brower-Drag-and-Drop) — 캔버스의 폴더 트리에서 기존 Load Image로 이미지를 드래그하는 ComfyUI 노드
+
+### Image Browser 미리보기
+
+[![Healingarty Image Browser](https://raw.githubusercontent.com/daning1212/Healinagarty-picture-brower-Drag-and-Drop/main/docs/image-browser-preview.png)](https://github.com/daning1212/Healinagarty-picture-brower-Drag-and-Drop)
+
+폴더 트리 유지, 현재 위치 강조, 썸네일 크기 조절, 검색과 즐겨찾기를 지원합니다. [설치 및 사용 안내](https://github.com/daning1212/Healinagarty-picture-brower-Drag-and-Drop#설치)
