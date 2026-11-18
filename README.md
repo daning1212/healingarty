@@ -14,7 +14,7 @@
 - [Instagram](https://www.instagram.com/healing_arty)
 
 ### 직접 만든 도구
-홈페이지의 ‘만든 도구’ 코너에서 일곱 프로젝트를 소개합니다.
+홈페이지의 ‘만든 도구’ 코너에서 여덟 프로젝트를 소개합니다.
 
 - [DRAG · CROP · SAVE](https://github.com/daning1212/DRAG-CROP-SAVE) — 드래그로 영상 화면을 잘라 저장하는 로컬 도구
 - [Prompt Randomizer](https://github.com/daning1212/HealingaArty_prompt_randomizer) — ComfyUI 프롬프트 조합 노드
@@ -24,6 +24,8 @@
 - [ARTA MATRYOSHKA](https://github.com/daning1212/ARTA-MATRYOSHKA) — 다층 방어 연구 프로토타입
 
 - [Healingarty Image Browser](https://github.com/daning1212/Healingarty-Image-Browser-Drag-Drop-Select) — 드래그 또는 클릭 선택으로 이미지를 연결하는 ComfyUI 노드 — Drag, Drop & Select
+
+- [HealingArty Ramdom Camera Angle](https://github.com/daning1212/HealingArty-Random-Camera-angle) — 인물 촬영 프리셋 100개를 랜덤·순차·고정으로 선택하는 ComfyUI 노드
 
 ### Image Browser 미리보기
 
