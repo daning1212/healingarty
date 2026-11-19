@@ -106,3 +106,26 @@
   .service-grid h3{font-size:20px;overflow-wrap:anywhere}
   .service-grid p{overflow-wrap:anywhere}
 }
+
+/* Digital Toys */
+.digital-toys{padding-block:clamp(34px,5vw,65px)}
+.digital-toys .section-heading{margin-bottom:16px}
+.digital-toys h2 em{color:var(--accent);font-style:normal}
+.toy-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.toy-card{display:grid;grid-template-columns:112px minmax(0,1fr) auto;align-items:center;gap:13px;padding:12px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
+.toy-copy h3{margin:0;font-size:17px;line-height:1.2}
+.toy-copy p{margin:5px 0 0;color:var(--muted);font-size:12px;line-height:1.55}
+.toy-preview{height:67px;padding:7px 7px 5px;overflow:hidden;border:1px solid #ffffff25;border-radius:4px;font:8px/1.35 ui-monospace,monospace}
+.toy-preview b{display:block;white-space:nowrap}
+.toy-preview-artex{color:#c9dbfa;background:linear-gradient(150deg,#1b2743,#14192b)}
+.toy-agents{display:flex;gap:4px;margin-top:5px}
+.toy-agents span{color:#aacfff;background:#263d60;border:1px solid #587ba3;border-radius:3px;text-align:center;flex:1;padding:2px;font-size:13px}
+.toy-agents span:nth-child(2){color:#d5c0ff;border-color:#625480}
+.toy-agents span:nth-child(3){color:#7bdfab;border-color:#436f57}
+.toy-preview-picox{color:#78f5a0;background:#071810}
+.toy-preview-picox span{display:block;white-space:nowrap}
+.toy-preview-picox i{display:inline-block;width:5px;height:7px;background:#78f5a0}
+.toy-play{background:var(--accent);color:var(--bg);padding:6px 9px;border-radius:5px;font-size:11px;font-weight:750;white-space:nowrap}
+.toy-play:hover{background:#e6f7ad}
+@media(max-width:880px){.toy-grid{grid-template-columns:1fr}}
+@media(max-width:420px){.toy-card{grid-template-columns:82px minmax(0,1fr) auto;gap:8px;padding:8px}.toy-preview{padding-inline:4px;font-size:6px}.toy-play{padding-inline:6px}}

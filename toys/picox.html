@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PICOX Console</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #020704;
+      color: #42ff91;
+      font: 16px/1.45 "Cascadia Mono", "Consolas", monospace;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .18;
+      background: repeating-linear-gradient(0deg, transparent 0 3px, #9cffbf 4px 5px);
+    }
+    .terminal {
+      width: min(1000px, 92vw);
+      height: min(680px, 88vh);
+      padding: 22px 26px;
+      border: 1px solid #24b965;
+      border-radius: 10px;
+      box-shadow: 0 0 22px #0c703c80, inset 0 0 32px #07381d66;
+      background: #031008ed;
+      display: flex;
+      flex-direction: column;
+    }
+    .header { display: flex; justify-content: space-between; color: #8affb5; margin-bottom: 14px; }
+    .dots { color: #41f38b; letter-spacing: 5px; }
+    #log { flex: 1; overflow: hidden; white-space: pre-wrap; text-shadow: 0 0 8px #39ff88a0; }
+    .muted { color: #20a758; }
+    .warn { color: #eaff8c; }
+    .prompt { margin-top: 10px; }
+    .cursor { display: inline-block; width: 9px; height: 18px; vertical-align: -3px; background: #57ffa0; animation: blink 1s steps(2) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .stamp { font-size: 12px; color: #208f4c; margin-top: 7px; text-align: right; }
+  </style>
+</head>
+<body>
+  <main class="terminal">
+    <div class="header"><span>PICOX // NODE CONSOLE</span><span class="dots">● ● ●</span></div>
+    <div id="log" aria-live="polite"></div>
+    <div class="prompt">root@picox:~$ <span id="command"></span><span class="cursor"></span></div>
+    <div class="stamp">SIMULATION ONLY · NO NETWORK ACTIVITY</div>
+  </main>
+  <script>
+    const entries = [
+      '[INIT] Loading PICOX visual console ... OK',
+      '[AUTH] Local session token generated ... OK',
+      '[PROTO] Protocol map: PICO-TESTNET / v0.8.2',
+      '[DIAG] Node latency check ............. 12 ms',
+      '[LEDGER] Mock block #008441 indexed ... OK',
+      '[SCAN] Market pulse stream attached ... OK',
+      '[CRYPT] Simulating ledger checksum .... VERIFIED',
+      '[ROUTE] localhost gateway ............. ONLINE',
+      '[SYNC] Test wallet state .............. COMPLETE',
+      '[STATUS] No external connection required.',
+      '[READY] PICOX demo environment armed.'
+    ];
+    const log = document.querySelector('#log');
+    const command = document.querySelector('#command');
+    let index = 0;
+    function writeEntry() {
+      const line = document.createElement('div');
+      line.textContent = entries[index % entries.length];
+      if (line.textContent.includes('VERIFIED')) line.className = 'warn';
+      if (line.textContent.includes('external')) line.className = 'muted';
+      log.appendChild(line);
+      while (log.children.length > 19) log.removeChild(log.firstChild);
+      index++;
+    }
+    const typing = 'diagnose --protocol picox --mode simulation';
+    let position = 0;
+    setInterval(() => {
+      command.textContent = typing.slice(0, position++ % (typing.length + 1));
+    }, 70);
+    entries.slice(0, 5).forEach(writeEntry);
+    setInterval(writeEntry, 1300);
+  </script>
+</body>
+</html>
