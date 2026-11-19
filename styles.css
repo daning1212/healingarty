@@ -32,3 +32,40 @@
 @media(max-width:360px){.tool-table tr{grid-template-columns:1fr}.tool-table .tool-description{padding-right:18px}.tool-table .tool-row-links{display:flex;flex-wrap:wrap;gap:20px;padding-left:48px}.tool-source-link{margin-top:0}.tool-title{font-size:22px}}
 
 .tool-browser-preview{margin:26px 0 0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--panel)}.tool-browser-preview img{display:block;width:100%;height:auto}.tool-browser-preview figcaption{padding:14px 18px;color:var(--muted);font-size:12px}.tool-browser-preview figcaption a{display:inline-block;margin-left:12px;color:var(--accent)}
+
+/* Portfolio-first homepage */
+.workshop-home .brand{font-size:clamp(20px,2.2vw,28px);letter-spacing:-.045em}
+.front-work{padding:clamp(30px,5vw,72px) 0 clamp(33px,5vw,66px)}
+.front-heading{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:26px}
+.front-heading h1{font-size:clamp(40px,6.2vw,78px);line-height:1.08;letter-spacing:-.075em;margin:0}
+.front-heading p{margin:14px 0 0;color:var(--muted);font-size:clamp(14px,1.45vw,17px)}
+.front-heading .button{flex:none}
+.playlist-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.playlist-card{display:block;min-width:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel);transition:border-color .2s ease}
+.playlist-card:hover{border-color:var(--accent)}
+.playlist-art{position:relative;display:grid;place-items:center;overflow:hidden;isolation:isolate;aspect-ratio:2.9;min-height:114px}
+.playlist-visual .playlist-art{background:radial-gradient(ellipse at 76% 45%,#68899d 0%,#263f61 29%,#152335 62%,#0e1926 100%)}
+.visual-disc{position:absolute;width:24%;aspect-ratio:1;border-radius:50%;left:59%;top:18%;background:radial-gradient(circle at 39% 31%,#f3e9c5,#d4bd8f 42%,#9d886e 66%,#55687c 89%);box-shadow:0 0 40px #dfc59648}
+.viewfinder{position:absolute;inset:16%;opacity:.67;background:linear-gradient(#e6eafa,#e6eafa) top left/20px 1px,linear-gradient(#e6eafa,#e6eafa) top left/1px 15px,linear-gradient(#e6eafa,#e6eafa) bottom right/20px 1px,linear-gradient(#e6eafa,#e6eafa) bottom right/1px 15px;background-repeat:no-repeat}
+.playlist-sound .playlist-art{background:radial-gradient(ellipse at 72% 25%,#885437,#522d2d 47%,#281a27 100%)}
+.record{position:absolute;width:38%;aspect-ratio:1;left:49%;top:-9%;border-radius:50%;background:radial-gradient(circle,#2a1f24 0 3%,#be9060 3.5% 19%,transparent 20%),repeating-radial-gradient(circle,#2f252a 0 3px,#4c3538 4px 5px);box-shadow:0 12px 18px #191118a3;transform:rotateX(28deg)}
+.sound-line{position:absolute;width:32%;height:19%;top:44%;left:13%;background:repeating-linear-gradient(90deg,#e4ac79 0 2px,transparent 2px 6px);clip-path:polygon(0 50%,8% 34%,14% 52%,24% 9%,33% 30%,45% 0,54% 46%,65% 18%,75% 35%,84% 30%,100% 50%,84% 70%,75% 65%,65% 82%,54% 54%,45% 100%,33% 70%,24% 91%,14% 48%,8% 66%);opacity:.78}
+.playlist-play{position:absolute;left:16px;bottom:14px;background:#111310dc;border:1px solid #ffffff56;color:#fff;border-radius:50%;width:36px;height:36px;display:grid;place-items:center;font-size:12px}
+.playlist-caption{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 18px}
+.playlist-caption h2{margin:0;font-size:clamp(21px,2.3vw,30px);line-height:1.2;letter-spacing:-.045em}
+.playlist-caption p{margin:5px 0 0;font-size:13px;color:var(--muted)}
+.playlist-caption>span,.channel-links a{font-size:13px;color:var(--accent);white-space:nowrap}
+.channel-links{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:15px}
+.channel-links a:hover{text-decoration:underline;text-underline-offset:4px}
+.workshop-stack{padding-block:25px;border-block:1px solid var(--line);display:flex;align-items:center;gap:16px 38px;flex-wrap:wrap}
+.workshop-stack h2{font-size:15px;margin:0}
+.workshop-stack ul{display:flex;flex-wrap:wrap;gap:12px 22px;list-style:none;margin:0;padding:0}
+.workshop-stack li{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}
+.workshop-stack li img{filter:invert(90%);opacity:.85}
+@media(max-width:720px){
+  .front-heading{align-items:start;flex-direction:column;gap:15px}
+  .playlist-grid{grid-template-columns:1fr;gap:14px}
+  .playlist-caption{padding:13px 14px}
+  .playlist-art{min-height:106px}
+}
+@media(prefers-reduced-motion:reduce){.playlist-card{transition:none}}
