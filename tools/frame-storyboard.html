@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111310">
+  <meta name="description" content="PC���� �����ϴ� �������� �������� ���丮���� ����">
+  <title>frame-storyboard</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111310;
+      --panel: #191c18;
+      --panel-2: #20241e;
+      --line: #343a30;
+      --text: #f2f2ec;
+      --muted: #a3aa9b;
+      --accent: #c3e35a;
+      --danger: #ed8175;
+      --radius: 12px;
+      font-family: Inter, "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; background: var(--bg); color: var(--text); }
+    button, input, select, textarea { font: inherit; }
+    button { color: inherit; }
+    button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 2px;
+    }
+    .topbar {
+      height: 68px; display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; padding: 0 24px; border-bottom: 1px solid var(--line);
+      background: #141612; position: sticky; top: 0; z-index: 5;
+    }
+    .brand { display: flex; align-items: center; gap: 11px; min-width: 170px; }
+    .brand-mark { width: 28px; height: 28px; border: 2px solid var(--accent); position: relative; }
+    .brand-mark::before, .brand-mark::after { content: ""; position: absolute; background: var(--accent); }
+    .brand-mark::before { width: 2px; height: 18px; left: 11px; top: 3px; transform: rotate(38deg); }
+    .brand-mark::after { height: 2px; width: 18px; left: 3px; top: 12px; transform: rotate(-22deg); }
+    .brand strong { font-size: 15px; letter-spacing: .02em; }
+    .brand small { display: block; color: var(--muted); font-size: 11px; margin-top: 2px; }
+    .toolbar { display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
+    .button {
+      border: 1px solid var(--line); background: var(--panel-2); border-radius: 8px;
+      padding: 9px 12px; min-height: 38px; cursor: pointer; font-size: 13px;
+    }
+    .button:hover { border-color: #727d65; background: #292e26; }
+    .button.primary { background: var(--accent); border-color: var(--accent); color: #171a12; font-weight: 750; }
+    .button.primary:hover { background: #d2ef76; }
+    .button.danger { color: var(--danger); }
+    .button.small { min-height: 30px; padding: 5px 9px; font-size: 12px; }
+    .save-state { color: var(--muted); font-size: 12px; margin: 0 8px; white-space: nowrap; }
+    .workspace { display: grid; grid-template-columns: 255px minmax(320px, 1fr) 326px; min-height: calc(100vh - 68px); }
+    .sidebar, .inspector { background: var(--panel); min-width: 0; }
+    .sidebar { border-right: 1px solid var(--line); padding: 20px 14px; }
+    .inspector { border-left: 1px solid var(--line); padding: 20px 18px; }
+    .project-fields { padding: 0 5px 18px; border-bottom: 1px solid var(--line); margin-bottom: 17px; }
+    .label { display: block; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; margin: 0 0 7px; text-transform: uppercase; }
+    input, select, textarea {
+      width: 100%; background: #111310; color: var(--text); border: 1px solid var(--line);
+      border-radius: 7px; padding: 10px 11px; min-height: 40px;
+    }
+    textarea { resize: vertical; min-height: 82px; line-height: 1.5; }
+    .project-fields input { font-size: 15px; font-weight: 700; margin-bottom: 12px; }
+    .section-title { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 4px 11px; }
+    .section-title h2 { font-size: 13px; margin: 0; }
+    .scene-list { display: grid; gap: 6px; }
+    .scene-item {
+      border: 1px solid transparent; background: transparent; border-radius: 8px;
+      width: 100%; padding: 10px; text-align: left; cursor: pointer; display: flex;
+      justify-content: space-between; align-items: center; gap: 8px;
+    }
+    .scene-item:hover { background: var(--panel-2); }
+    .scene-item.active { background: #2a3022; border-color: #596644; }
+    .scene-label { min-width: 0; }
+    .scene-label strong { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 13px; }
+    .scene-label small { color: var(--muted); font-size: 11px; display: block; margin-top: 4px; }
+    .scene-count { color: var(--muted); font-size: 11px; }
+    .sidebar-note { color: var(--muted); font-size: 11px; line-height: 1.55; padding: 16px 5px 0; }
+    .board-area { min-width: 0; padding: 28px clamp(18px, 3vw, 42px) 48px; }
+    .board-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 24px; }
+    .eyebrow { color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: .15em; margin: 0 0 8px; }
+    .board-header h1 { font-size: clamp(23px, 3vw, 34px); letter-spacing: -.035em; margin: 0; }
+    .board-header p { color: var(--muted); font-size: 12px; margin: 8px 0 0; }
+    .board-actions { display: flex; gap: 7px; flex-shrink: 0; }
+    .shot-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 16px; align-items: start; }
+    .shot-card {
+      min-width: 0; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel);
+      overflow: hidden; transition: border-color .15s, transform .15s; cursor: pointer;
+    }
+    .shot-card:hover { border-color: #69765c; transform: translateY(-2px); }
+    .shot-card.selected { border-color: var(--accent); box-shadow: 0 0 0 1px #c3e35a33; }
+    .shot-image { aspect-ratio: 16 / 9; background: #252a22; display: grid; place-items: center; overflow: hidden; position: relative; }
+    .shot-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .image-empty { color: #818a78; font-size: 12px; text-align: center; padding: 12px; }
+    .image-empty b { display: block; font-size: 25px; font-weight: 400; color: #a9b39b; margin-bottom: 5px; }
+    .shot-number { position: absolute; top: 9px; left: 9px; border-radius: 5px; background: #111310dd; padding: 5px 7px; font-size: 11px; }
+    .shot-card-body { padding: 13px; }
+    .shot-card-title { font-size: 14px; margin: 0 0 6px; overflow-wrap: anywhere; }
+    .shot-card-action { color: var(--muted); font-size: 12px; line-height: 1.45; margin: 0; min-height: 34px; white-space: pre-wrap; }
+    .shot-meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; border-top: 1px solid var(--line); margin-top: 12px; padding-top: 10px; color: var(--muted); font-size: 11px; }
+    .shot-controls { display: flex; gap: 5px; }
+    .icon-button { border: 0; background: transparent; color: var(--muted); cursor: pointer; border-radius: 5px; padding: 4px 6px; }
+    .icon-button:hover { background: #32382d; color: var(--text); }
+    .empty-board { grid-column: 1 / -1; min-height: 260px; display: grid; place-items: center; text-align: center; border: 1px dashed #596052; border-radius: var(--radius); color: var(--muted); padding: 30px; }
+    .empty-board h2 { color: var(--text); font-size: 18px; margin: 0 0 8px; }
+    .inspector-heading { font-size: 14px; margin: 0 0 18px; }
+    .image-preview { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #111310; aspect-ratio: 16 / 9; margin-bottom: 9px; display: grid; place-items: center; color: var(--muted); font-size: 12px; }
+    .image-preview img { width: 100%; height: 100%; object-fit: contain; }
+    .image-actions { display: flex; gap: 7px; margin-bottom: 20px; }
+    .field { margin-bottom: 15px; }
+    .field textarea.prompt { min-height: 116px; }
+    .two-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .hint { color: var(--muted); font-size: 11px; line-height: 1.5; margin: 18px 0 0; }
+    .disabled { opacity: .45; pointer-events: none; }
+    #importFile, #imageFile { display: none; }
+    #printArea { display: none; }
+    .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #eaf4d0; color: #15180f; padding: 10px 16px; border-radius: 8px; box-shadow: 0 8px 28px #0008; z-index: 20; font-size: 13px; }
+    @media (max-width: 1080px) { .workspace { grid-template-columns: 220px minmax(300px, 1fr); } .inspector { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); } .inspector-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; } .inspector-heading { grid-column: 1 / -1; } }
+    @media (max-width: 680px) {
+      .topbar { height: auto; min-height: 64px; align-items: flex-start; flex-direction: column; padding: 13px 15px; gap: 10px; position: static; }
+      .brand { min-width: 0; } .toolbar { justify-content: flex-start; }
+      .save-state { margin-left: 0; }
+      .workspace { display: flex; flex-direction: column; }
+      .sidebar { border-right: 0; border-bottom: 1px solid var(--line); padding: 14px; }
+      .scene-list { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+      .sidebar-note { padding-top: 8px; }
+      .board-area { padding: 22px 14px 32px; }
+      .board-header { align-items: flex-start; flex-direction: column; }
+      .inspector { border-left: 0; padding: 18px 14px; }
+      .inspector-grid { grid-template-columns: 1fr; }
+      .inspector-heading { grid-column: auto; }
+    }
+    @media print {
+      body { color: #111; background: #fff; }
+      .topbar, .workspace { display: none !important; }
+      #printArea { display: block !important; padding: 10mm; color: #111; }
+      #printArea h1 { font-size: 24px; margin: 0 0 3mm; }
+      #printArea .print-meta { color: #444; margin-bottom: 8mm; font-size: 10pt; }
+      #printArea h2 { font-size: 16px; margin: 8mm 0 3mm; border-bottom: 1px solid #aaa; padding-bottom: 2mm; }
+      #printArea .print-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5mm; }
+      #printArea .print-shot { border: 1px solid #bbb; padding: 3mm; break-inside: avoid; }
+      #printArea img { width: 100%; max-height: 70mm; object-fit: contain; background: #eee; }
+      #printArea h3 { font-size: 11pt; margin: 2mm 0; }
+      #printArea p { font-size: 9pt; white-space: pre-wrap; margin: 1.5mm 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true"></span><div><strong>frame-storyboard</strong><small>LOCAL STORYBOARD TOOL</small></div></div>
+    <div class="toolbar">
+      <span id="saveState" class="save-state" role="status">�� �������� ����</span>
+      <button id="newProject" class="button" type="button">�� ������Ʈ</button>
+      <button id="importProject" class="button" type="button">������Ʈ ����</button>
+      <button id="exportProject" class="button" type="button">ZIP���� ����</button>
+      <button id="printProject" class="button primary" type="button">�μ� �� PDF</button>
+    </div>
+  </header>
+
+  <div class="workspace">
+    <aside class="sidebar" aria-label="������Ʈ�� ���">
+      <div class="project-fields">
+        <label class="label" for="projectTitle">������Ʈ</label>
+        <input id="projectTitle" type="text" maxlength="120" placeholder="������Ʈ �̸�">
+        <label class="label" for="aspectRatio">ȭ�� ����</label>
+        <select id="aspectRatio">
+          <option value="16:9">16:9 ����</option>
+          <option value="9:16">9:16 ����</option>
+          <option value="1:1">1:1 ���簢</option>
+          <option value="4:3">4:3</option>
+        </select>
+      </div>
+      <div class="section-title"><h2>��� ����</h2><button id="addScene" class="button small" type="button">�� ���</button></div>
+      <div id="sceneList" class="scene-list"></div>
+      <p class="sidebar-note">�۾� ������ �� �������� �ڵ� ����˴ϴ�. �ٸ� PC�� �ű�ų� ����� ���� ZIP���� �����ϼ���.</p>
+    </aside>
+
+    <main class="board-area">
+      <div class="board-header">
+        <div><p class="eyebrow">STORYBOARD / <span id="sceneNumber">01</span></p><h1 id="sceneHeading">��� 1</h1><p id="shotCount">�� 0��</p></div>
+        <div class="board-actions">
+          <button id="renameScene" class="button" type="button">��� �̸�</button>
+          <button id="deleteScene" class="button danger" type="button">��� ����</button>
+          <button id="addShot" class="button primary" type="button">�� �� �߰�</button>
+        </div>
+      </div>
+      <section id="shotBoard" class="shot-board" aria-label="������ ����� ��"></section>
+    </main>
+
+    <aside class="inspector" aria-label="������ �� ����">
+      <h2 class="inspector-heading">�� ����</h2>
+      <div id="inspectorContents">
+        <div class="image-preview" id="imagePreview">���� �����ϼ���</div>
+        <div class="image-actions">
+          <button id="addImage" class="button small" type="button">���� �ֱ�</button>
+          <button id="removeImage" class="button small" type="button">���� ����</button>
+          <input id="imageFile" type="file" accept="image/*">
+        </div>
+        <div class="field"><label class="label" for="shotTitle">�� ����</label><input id="shotTitle" data-field="title" maxlength="120" type="text"></div>
+        <div class="field"><label class="label" for="action">ȭ�鿡�� �Ͼ�� ��</label><textarea id="action" data-field="action" placeholder="�ι��� �ൿ�� ȭ�� ��ȭ�� �����ּ���."></textarea></div>
+        <div class="two-fields">
+          <div class="field"><label class="label" for="shotSize">�� ũ��</label><select id="shotSize" data-field="shotSize"><option>���̵�</option><option>Ǯ��</option><option>�̵��</option><option>Ŭ�����</option><option>������</option><option>��Ÿ</option></select></div>
+          <div class="field"><label class="label" for="duration">���� (��)</label><input id="duration" data-field="duration" type="number" min="0.5" max="600" step="0.5"></div>
+        </div>
+        <div class="field"><label class="label" for="camera">ī�޶� �� ������</label><input id="camera" data-field="camera" type="text" placeholder="��: ����, õõ�� ������ �̵�"></div>
+        <div class="field"><label class="label" for="sound">��� �� �Ҹ� �� ����</label><textarea id="sound" data-field="sound" placeholder="���, ȿ����, �������"></textarea></div>
+        <div class="field"><label class="label" for="prompt">���� ������Ʈ</label><textarea id="prompt" class="prompt" data-field="prompt" placeholder="�ʿ��ϸ� ������ ���� ������Ʈ�� ����μ���."></textarea></div>
+        <div class="field"><label class="label" for="notes">�޸�</label><textarea id="notes" data-field="notes" placeholder="��ȯ, ��ǰ, ���� ���� ��"></textarea></div>
+      </div>
+      <p class="hint">������ �ƿ� ������ �������� �����մϴ�. ZIP���� �����ϸ� ������Ʈ ������ ���� ������ �� ���Ϸ� ���Դϴ�.</p>
+    </aside>
+  </div>
+
+  <section id="printArea" aria-hidden="true"></section>
+  <input id="importFile" type="file" accept=".zip,.frame.zip,.json,application/zip,application/json">
+
+  <script>
+    "use strict";
+    const STORAGE_KEY = "frame-storyboard-project-v1";
+    const DB_NAME = "frame-storyboard-assets-v1";
+    let project = loadProject();
+    let selectedSceneId = project.scenes[0]?.id || null;
+    let selectedShotId = project.scenes[0]?.shots[0]?.id || null;
+    let dbPromise;
+    let objectUrls = new Map();
+    let saveTimer;
+
+    function uid() { return "id-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10); }
+    function blankShot() {
+      return { id: uid(), title: "�� ��", duration: 5, shotSize: "�̵��", action: "", camera: "", sound: "", prompt: "", notes: "", assetId: null, assetName: "" };
+    }
+    function blankScene(number) { return { id: uid(), title: "��� " + number, shots: [blankShot()] }; }
+    function blankProject() { return { id: uid(), title: "�� ���丮����", aspectRatio: "16:9", updatedAt: new Date().toISOString(), scenes: [blankScene(1)] }; }
+    function loadProject() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        if (saved && Array.isArray(saved.scenes)) return saved;
+      } catch (_) {}
+      return blankProject();
+    }
+    function currentScene() { return project.scenes.find(function (scene) { return scene.id === selectedSceneId; }) || null; }
+    function currentShot() {
+      const scene = currentScene();
+      return scene ? scene.shots.find(function (shot) { return shot.id === selectedShotId; }) || null : null;
+    }
+    function escapeHtml(value) {
+      return String(value == null ? "" : value).replace(/[&<>"']/g, function (char) {
+        return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char];
+      });
+    }
+    function openDB() {
+      if (!("indexedDB" in window)) return Promise.reject(new Error("IndexedDB unavailable"));
+      if (dbPromise) return dbPromise;
+      dbPromise = new Promise(function (resolve, reject) {
+        const request = indexedDB.open(DB_NAME, 1);
+        request.onupgradeneeded = function () { request.result.createObjectStore("images"); };
+        request.onsuccess = function () { resolve(request.result); };
+        request.onerror = function () { reject(request.error || new Error("Could not open local image storage")); };
+      });
+      return dbPromise;
+    }
+    async function putAsset(id, blob) {
+      const db = await openDB();
+      return new Promise(function (resolve, reject) {
+        const tx = db.transaction("images", "readwrite");
+        tx.objectStore("images").put(blob, id);
+        tx.oncomplete = function () { resolve(); };
+        tx.onerror = function () { reject(tx.error || new Error("Could not save image")); };
+      });
+    }
+    async function getAsset(id) {
+      if (!id) return null;
+      const db = await openDB();
+      return new Promise(function (resolve, reject) {
+        const request = db.transaction("images", "readonly").objectStore("images").get(id);
+        request.onsuccess = function () { resolve(request.result || null); };
+        request.onerror = function () { reject(request.error || new Error("Could not read image")); };
+      });
+    }
+    async function deleteAsset(id) {
+      if (!id) return;
+      const url = objectUrls.get(id);
+      if (url) { URL.revokeObjectURL(url); objectUrls.delete(id); }
+      const db = await openDB();
+      return new Promise(function (resolve, reject) {
+        const tx = db.transaction("images", "readwrite");
+        tx.objectStore("images").delete(id);
+        tx.oncomplete = function () { resolve(); };
+        tx.onerror = function () { reject(tx.error || new Error("Could not remove image")); };
+      });
+    }
+    async function assetUrl(id) {
+      if (!id) return "";
+      if (objectUrls.has(id)) return objectUrls.get(id);
+      const blob = await getAsset(id);
+      if (!blob) return "";
+      const url = URL.createObjectURL(blob);
+      objectUrls.set(id, url);
+      return url;
+    }
+    function scheduleSave() {
+      document.getElementById("saveState").textContent = "���� �ߡ�";
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(function () {
+        try {
+          project.updatedAt = new Date().toISOString();
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(project));
+          document.getElementById("saveState").textContent = "�� �������� �����";
+        } catch (_) {
+          document.getElementById("saveState").textContent = "���� ���� ���� �� ZIP���� ����";
+        }
+      }, 250);
+    }
+    function updateShotCardText(shot) {
+      const card = document.querySelector('[data-shot-id="' + shot.id + '"]');
+      if (!card) return;
+      card.querySelector(".shot-card-title").textContent = shot.title || "���� ���� ��";
+      card.querySelector(".shot-card-action").textContent = shot.action || "ȭ�� ������ �Է��ϼ���.";
+      card.querySelector(".shot-seconds").textContent = (shot.duration || 0) + "��";
+    }
+    function renderSceneList() {
+      const root = document.getElementById("sceneList");
+      root.innerHTML = "";
+      project.scenes.forEach(function (scene, index) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "scene-item" + (scene.id === selectedSceneId ? " active" : "");
+        button.dataset.sceneId = scene.id;
+        button.innerHTML = '<span class="scene-label"><strong>' + escapeHtml(scene.title) + '</strong><small>��� ' + String(index + 1).padStart(2, "0") + '</small></span><span class="scene-count">' + scene.shots.length + '��</span>';
+        root.appendChild(button);
+      });
+    }
+    async function renderBoard() {
+      const scene = currentScene();
+      const root = document.getElementById("shotBoard");
+      root.innerHTML = "";
+      document.getElementById("sceneHeading").textContent = scene ? scene.title : "��� ����";
+      document.getElementById("sceneNumber").textContent = String(Math.max(0, project.scenes.indexOf(scene) + 1)).padStart(2, "0");
+      document.getElementById("shotCount").textContent = scene ? "�� " + scene.shots.length + "��" : "���ʿ��� ����� �߰��ϼ���.";
+      document.getElementById("addShot").disabled = !scene;
+      document.getElementById("renameScene").disabled = !scene;
+      document.getElementById("deleteScene").disabled = !scene;
+      if (!scene) {
+        root.innerHTML = '<div class="empty-board"><div><h2>���� ����� �����ϴ�</h2><p>�� ����� ���� ù ���带 ���弼��.</p></div></div>';
+        return;
+      }
+      for (let i = 0; i < scene.shots.length; i++) {
+        const shot = scene.shots[i];
+        const card = document.createElement("article");
+        card.className = "shot-card" + (shot.id === selectedShotId ? " selected" : "");
+        card.dataset.shotId = shot.id;
+        const image = await assetUrl(shot.assetId);
+        card.innerHTML = '<div class="shot-image">' + (image ? '<img alt="" src="' + image + '">' : '<div class="image-empty"><b>��</b>������ �־� ���� �ð�ȭ�ϼ���</div>') + '<span class="shot-number">CUT ' + String(i + 1).padStart(2, "0") + '</span></div><div class="shot-card-body"><h3 class="shot-card-title">' + escapeHtml(shot.title || "���� ���� ��") + '</h3><p class="shot-card-action">' + escapeHtml(shot.action || "ȭ�� ������ �Է��ϼ���.") + '</p><div class="shot-meta"><span>' + escapeHtml(shot.shotSize || "�̵��") + ' �� <span class="shot-seconds">' + escapeHtml(shot.duration || 0) + '��</span></span><span class="shot-controls"><button class="icon-button" type="button" data-action="up" aria-label="���� ����">��</button><button class="icon-button" type="button" data-action="down" aria-label="���� �Ʒ���">��</button><button class="icon-button" type="button" data-action="delete" aria-label="�� ����">��</button></span></div></div>';
+        root.appendChild(card);
+      }
+    }
+    async function renderInspector() {
+      const shot = currentShot();
+      const contents = document.getElementById("inspectorContents");
+      contents.classList.toggle("disabled", !shot);
+      document.querySelector(".inspector-heading").textContent = shot ? "�� ����" : "�� ���� �� ����� �����ϼ���";
+      const fields = ["title", "action", "shotSize", "duration", "camera", "sound", "prompt", "notes"];
+      fields.forEach(function (field) {
+        const control = document.querySelector('[data-field="' + field + '"]');
+        if (control) control.value = shot ? (shot[field] == null ? "" : shot[field]) : "";
+      });
+      const preview = document.getElementById("imagePreview");
+      if (!shot || !shot.assetId) {
+        preview.innerHTML = shot ? "�ƿ� ����� ������ �����ϴ�" : "���� �����ϼ���";
+      } else {
+        const url = await assetUrl(shot.assetId);
+        preview.innerHTML = url ? '<img alt="������ �� ����" src="' + url + '">' : "���� ������ ã�� �� �����ϴ�. ������Ʈ ZIP�� �ٽ� �ҷ�������.";
+      }
+    }
+    async function renderAll() {
+      document.getElementById("projectTitle").value = project.title || "";
+      document.getElementById("aspectRatio").value = project.aspectRatio || "16:9";
+      renderSceneList();
+      await renderBoard();
+      await renderInspector();
+    }
+    function selectScene(id) {
+      selectedSceneId = id;
+      const scene = currentScene();
+      selectedShotId = scene && scene.shots[0] ? scene.shots[0].id : null;
+      renderAll();
+    }
+    function addScene() {
+      const scene = blankScene(project.scenes.length + 1);
+      project.scenes.push(scene);
+      selectedSceneId = scene.id;
+      selectedShotId = scene.shots[0].id;
+      scheduleSave();
+      renderAll();
+    }
+    function addShot() {
+      const scene = currentScene();
+      if (!scene) return;
+      const shot = blankShot();
+      shot.title = "�� �� " + (scene.shots.length + 1);
+      scene.shots.push(shot);
+      selectedShotId = shot.id;
+      scheduleSave();
+      renderAll();
+    }
+    async function removeScene() {
+      const scene = currentScene();
+      if (!scene) return;
+      const cuts = scene.shots.length;
+      const message = "��" + scene.title + "�� ���� �� " + cuts + "���� �����ұ��? ����� ������ �� ������ ����ҿ��� ���ŵ˴ϴ�.";
+      if (!window.confirm(message)) return;
+      for (const shot of scene.shots) if (shot.assetId) await deleteAsset(shot.assetId);
+      project.scenes = project.scenes.filter(function (item) { return item.id !== scene.id; });
+      const next = project.scenes[0] || null;
+      selectedSceneId = next ? next.id : null;
+      selectedShotId = next && next.shots[0] ? next.shots[0].id : null;
+      scheduleSave();
+      renderAll();
+      toast("����� �����߽��ϴ�.");
+    }
+    async function removeShot(id) {
+      const scene = currentScene();
+      if (!scene) return;
+      const shot = scene.shots.find(function (item) { return item.id === id; });
+      if (!shot || !window.confirm("�� �ư� ����� ������ �����ұ��?")) return;
+      if (shot.assetId) await deleteAsset(shot.assetId);
+      scene.shots = scene.shots.filter(function (item) { return item.id !== id; });
+      if (selectedShotId === id) selectedShotId = scene.shots[0]?.id || null;
+      scheduleSave();
+      renderAll();
+      toast("���� �����߽��ϴ�.");
+    }
+    function moveShot(id, direction) {
+      const scene = currentScene();
+      if (!scene) return;
+      const index = scene.shots.findIndex(function (item) { return item.id === id; });
+      const next = index + direction;
+      if (index < 0 || next < 0 || next >= scene.shots.length) return;
+      const moved = scene.shots.splice(index, 1)[0];
+      scene.shots.splice(next, 0, moved);
+      scheduleSave();
+      renderAll();
+    }
+    function toast(message) {
+      const old = document.querySelector(".toast");
+      if (old) old.remove();
+      const node = document.createElement("div");
+      node.className = "toast";
+      node.textContent = message;
+      document.body.appendChild(node);
+      setTimeout(function () { node.remove(); }, 2300);
+    }
+    function saveField(event) {
+      const shot = currentShot();
+      if (!shot) return;
+      const field = event.target.dataset.field;
+      if (!field) return;
+      shot[field] = field === "duration" ? Math.max(0, Number(event.target.value) || 0) : event.target.value;
+      scheduleSave();
+      updateShotCardText(shot);
+    }
+    function crc32(bytes) {
+      let crc = -1;
+      for (let i = 0; i < bytes.length; i++) {
+        crc = (crc >>> 8) ^ CRC_TABLE[(crc ^ bytes[i]) & 255];
+      }
+      return (crc ^ -1) >>> 0;
+    }
+    const CRC_TABLE = (function () {
+      const table = new Uint32Array(256);
+      for (let n = 0; n < 256; n++) {
+        let c = n;
+        for (let k = 0; k < 8; k++) c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1);
+        table[n] = c >>> 0;
+      }
+      return table;
+    })();
+    function dosDateTime(date) {
+      const year = Math.max(1980, date.getFullYear());
+      return { time: (date.getHours() << 11) | (date.getMinutes() << 5) | Math.floor(date.getSeconds() / 2),
+        date: ((year - 1980) << 9) | ((date.getMonth() + 1) << 5) | date.getDate() };
+    }
+    async function zipStore(files) {
+      const encoder = new TextEncoder();
+      const local = [];
+      const central = [];
+      let offset = 0;
+      const stamp = dosDateTime(new Date());
+      for (const file of files) {
+        const name = encoder.encode(file.name);
+        const data = file.data instanceof Uint8Array ? file.data : new Uint8Array(await file.data.arrayBuffer());
+        const crc = crc32(data);
+        const header = new Uint8Array(30 + name.length);
+        const view = new DataView(header.buffer);
+        view.setUint32(0, 0x04034b50, true); view.setUint16(4, 20, true);
+        view.setUint16(6, 0x0800, true); view.setUint16(8, 0, true);
+        view.setUint16(10, stamp.time, true); view.setUint16(12, stamp.date, true);
+        view.setUint32(14, crc, true); view.setUint32(18, data.length, true); view.setUint32(22, data.length, true);
+        view.setUint16(26, name.length, true); view.setUint16(28, 0, true); header.set(name, 30);
+        local.push(header, data);
+        const centralHeader = new Uint8Array(46 + name.length);
+        const cv = new DataView(centralHeader.buffer);
+        cv.setUint32(0, 0x02014b50, true); cv.setUint16(4, 20, true); cv.setUint16(6, 20, true);
+        cv.setUint16(8, 0x0800, true); cv.setUint16(10, 0, true);
+        cv.setUint16(12, stamp.time, true); cv.setUint16(14, stamp.date, true);
+        cv.setUint32(16, crc, true); cv.setUint32(20, data.length, true); cv.setUint32(24, data.length, true);
+        cv.setUint16(28, name.length, true); cv.setUint16(30, 0, true); cv.setUint16(32, 0, true);
+        cv.setUint16(34, 0, true); cv.setUint16(36, 0, true); cv.setUint32(38, 0, true);
+        cv.setUint32(42, offset, true); centralHeader.set(name, 46);
+        central.push(centralHeader);
+        offset += header.length + data.length;
+      }
+      const centralSize = central.reduce(function (sum, item) { return sum + item.length; }, 0);
+      const end = new Uint8Array(22);
+      const ev = new DataView(end.buffer);
+      ev.setUint32(0, 0x06054b50, true); ev.setUint16(4, 0, true); ev.setUint16(6, 0, true);
+      ev.setUint16(8, files.length, true); ev.setUint16(10, files.length, true);
+      ev.setUint32(12, centralSize, true); ev.setUint32(16, offset, true); ev.setUint16(20, 0, true);
+      return new Blob(local.concat(central, [end]), { type: "application/zip" });
+    }
+    async function unzipStore(file) {
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+      let endOffset = -1;
+      for (let i = bytes.length - 22; i >= Math.max(0, bytes.length - 65557); i--) {
+        if (view.getUint32(i, true) === 0x06054b50) { endOffset = i; break; }
+      }
+      if (endOffset < 0) throw new Error("ZIP �� ������ ã�� ���߽��ϴ�.");
+      const count = view.getUint16(endOffset + 10, true);
+      let cursor = view.getUint32(endOffset + 16, true);
+      const decoder = new TextDecoder();
+      const files = new Map();
+      for (let i = 0; i < count; i++) {
+        if (view.getUint32(cursor, true) !== 0x02014b50) throw new Error("�ùٸ��� ���� ZIP �����Դϴ�.");
+        const method = view.getUint16(cursor + 10, true);
+        const size = view.getUint32(cursor + 24, true);
+        const nameLength = view.getUint16(cursor + 28, true);
+        const extraLength = view.getUint16(cursor + 30, true);
+        const commentLength = view.getUint16(cursor + 32, true);
+        const localOffset = view.getUint32(cursor + 42, true);
+        const name = decoder.decode(bytes.slice(cursor + 46, cursor + 46 + nameLength));
+        if (method !== 0) throw new Error("����� ZIP�� �� �� �����ϴ�. �� �������� ���� ������Ʈ ZIP�� ������ �ּ���.");
+        const localNameLength = view.getUint16(localOffset + 26, true);
+        const localExtraLength = view.getUint16(localOffset + 28, true);
+        const dataStart = localOffset + 30 + localNameLength + localExtraLength;
+        files.set(name, bytes.slice(dataStart, dataStart + size));
+        cursor += 46 + nameLength + extraLength + commentLength;
+      }
+      return files;
+    }
+    function safeName(value) {
+      return String(value || "image").replace(/[^a-zA-Z0-9��-�R._-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 70) || "image";
+    }
+    function download(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = filename; a.click();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+    }
+    async function exportProject() {
+      const copy = JSON.parse(JSON.stringify(project));
+      const files = [];
+      const encoder = new TextEncoder();
+      for (let si = 0; si < copy.scenes.length; si++) {
+        for (let ci = 0; ci < copy.scenes[si].shots.length; ci++) {
+          const shot = copy.scenes[si].shots[ci];
+          if (shot.assetId) {
+            const blob = await getAsset(shot.assetId);
+            if (blob) {
+              const ext = (shot.assetName || "").split(".").pop().toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 6) || "img";
+              const path = "images/scene-" + String(si + 1).padStart(2, "0") + "-cut-" + String(ci + 1).padStart(2, "0") + "-" + safeName(shot.assetName) + "." + ext;
+              files.push({ name: path, data: blob });
+              shot.imagePath = path;
+            }
+            delete shot.assetId;
+          }
+        }
+      }
+      files.unshift({ name: "project.json", data: encoder.encode(JSON.stringify(copy, null, 2)) });
+      const archive = await zipStore(files);
+      download(archive, safeName(project.title) + ".frame.zip");
+      toast("������ ���Ե� ������Ʈ ZIP�� �����߽��ϴ�.");
+    }
+    async function importProject(file) {
+      if (!file) return;
+      if (localStorage.getItem(STORAGE_KEY) && !window.confirm("���� �۾��� �ҷ��� ������Ʈ�� �ٲܱ��? ���� ���� �۾��� ZIP���� ������ �� �ֽ��ϴ�.")) return;
+      let imported;
+      if (file.name.toLowerCase().endsWith(".json")) {
+        imported = JSON.parse(await file.text());
+      } else {
+        const files = await unzipStore(file);
+        const projectBytes = files.get("project.json");
+        if (!projectBytes) throw new Error("project.json�� ���� ZIP�Դϴ�.");
+        imported = JSON.parse(new TextDecoder().decode(projectBytes));
+        for (const scene of imported.scenes || []) {
+          for (const shot of scene.shots || []) {
+            if (shot.imagePath && files.has(shot.imagePath)) {
+              const id = uid();
+              const extension = shot.imagePath.split(".").pop().toLowerCase();
+              const mime = ({ jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png", webp: "image/webp", gif: "image/gif", avif: "image/avif" })[extension] || "application/octet-stream";
+              await putAsset(id, new Blob([files.get(shot.imagePath)], { type: mime }));
+              shot.assetId = id;
+              shot.assetName = shot.imagePath.split("/").pop();
+            }
+            delete shot.imagePath;
+          }
+        }
+      }
+      if (!imported || !Array.isArray(imported.scenes)) throw new Error("���丮���� ������Ʈ ������ �ƴմϴ�.");
+      project = imported;
+      selectedSceneId = project.scenes[0]?.id || null;
+      selectedShotId = project.scenes[0]?.shots[0]?.id || null;
+      scheduleSave();
+      await renderAll();
+      toast("������Ʈ�� ������ �ҷ��Խ��ϴ�.");
+    }
+    async function printProject() {
+      const area = document.getElementById("printArea");
+      let html = '<h1>' + escapeHtml(project.title) + '</h1><p class="print-meta">' + escapeHtml(project.aspectRatio) + ' �� ' + project.scenes.length + '�� ���</p>';
+      for (let si = 0; si < project.scenes.length; si++) {
+        const scene = project.scenes[si];
+        html += '<h2>' + escapeHtml(scene.title) + '</h2><div class="print-grid">';
+        for (let ci = 0; ci < scene.shots.length; ci++) {
+          const shot = scene.shots[ci];
+          const src = await assetUrl(shot.assetId);
+          html += '<article class="print-shot">' + (src ? '<img src="' + src + '" alt="">' : '') + '<h3>' + String(ci + 1).padStart(2, "0") + ' �� ' + escapeHtml(shot.title) + ' �� ' + escapeHtml(shot.duration) + '��</h3><p>' + escapeHtml(shot.action) + '</p><p>ī�޶�: ' + escapeHtml(shot.camera) + '</p><p>�Ҹ�: ' + escapeHtml(shot.sound) + '</p><p>������Ʈ: ' + escapeHtml(shot.prompt) + '</p></article>';
+        }
+        html += '</div>';
+      }
+      area.innerHTML = html;
+      window.print();
+    }
+    function bindEvents() {
+      document.getElementById("projectTitle").addEventListener("input", function (event) { project.title = event.target.value; scheduleSave(); });
+      document.getElementById("aspectRatio").addEventListener("change", function (event) { project.aspectRatio = event.target.value; scheduleSave(); });
+      document.querySelectorAll("[data-field]").forEach(function (control) { control.addEventListener("input", saveField); control.addEventListener("change", saveField); });
+      document.getElementById("sceneList").addEventListener("click", function (event) {
+        const button = event.target.closest("[data-scene-id]");
+        if (button) selectScene(button.dataset.sceneId);
+      });
+      document.getElementById("shotBoard").addEventListener("click", function (event) {
+        const actionButton = event.target.closest("[data-action]");
+        const card = event.target.closest("[data-shot-id]");
+        if (!card) return;
+        if (actionButton) {
+          const action = actionButton.dataset.action;
+          if (action === "up") moveShot(card.dataset.shotId, -1);
+          else if (action === "down") moveShot(card.dataset.shotId, 1);
+          else if (action === "delete") removeShot(card.dataset.shotId);
+          return;
+        }
+        selectedShotId = card.dataset.shotId;
+        renderAll();
+      });
+      document.getElementById("addScene").addEventListener("click", addScene);
+      document.getElementById("addShot").addEventListener("click", addShot);
+      document.getElementById("deleteScene").addEventListener("click", removeScene);
+      document.getElementById("renameScene").addEventListener("click", function () {
+        const scene = currentScene();
+        if (!scene) return;
+        const title = window.prompt("��� �̸�", scene.title);
+        if (title == null) return;
+        scene.title = title.trim() || scene.title;
+        scheduleSave(); renderAll();
+      });
+      document.getElementById("addImage").addEventListener("click", function () { if (currentShot()) document.getElementById("imageFile").click(); });
+      document.getElementById("imageFile").addEventListener("change", async function (event) {
+        const file = event.target.files && event.target.files[0];
+        const shot = currentShot();
+        if (!file || !shot) return;
+        if (!file.type.startsWith("image/")) { alert("�̹��� ������ ������ �ּ���."); event.target.value = ""; return; }
+        try {
+          if (shot.assetId) await deleteAsset(shot.assetId);
+          const id = uid();
+          await putAsset(id, file);
+          shot.assetId = id; shot.assetName = file.name;
+          scheduleSave(); await renderAll(); toast("������ �ƿ� �־����ϴ�.");
+        } catch (error) {
+          alert("������ �������� ���߽��ϴ�. �������� ���� ���� ������ Ȯ���� �ּ���.");
+        }
+        event.target.value = "";
+      });
+      document.getElementById("removeImage").addEventListener("click", async function () {
+        const shot = currentShot();
+        if (!shot || !shot.assetId || !window.confirm("�� �ƿ��� ������ ���� ������ ����ҿ����� �����ұ��?")) return;
+        await deleteAsset(shot.assetId); shot.assetId = null; shot.assetName = "";
+        scheduleSave(); await renderAll(); toast("������ �����߽��ϴ�.");
+      });
+      document.getElementById("newProject").addEventListener("click", function () {
+        if (!window.confirm("���� ������Ʈ�� �� ������Ʈ�� �ٲܱ��? ������ ���Ե� ZIP���� ���� ������ �� �ֽ��ϴ�.")) return;
+        project = blankProject(); selectedSceneId = project.scenes[0].id; selectedShotId = project.scenes[0].shots[0].id;
+        scheduleSave(); renderAll();
+      });
+      document.getElementById("exportProject").addEventListener("click", function () { exportProject().catch(function (error) { alert("������Ʈ ZIP�� ������ ���߽��ϴ�: " + error.message); }); });
+      document.getElementById("importProject").addEventListener("click", function () { document.getElementById("importFile").click(); });
+      document.getElementById("importFile").addEventListener("change", function (event) {
+        const file = event.target.files && event.target.files[0];
+        if (file) importProject(file).catch(function (error) { alert("������Ʈ�� ���� ���߽��ϴ�: " + error.message); });
+        event.target.value = "";
+      });
+      document.getElementById("printProject").addEventListener("click", function () { printProject().catch(function () { alert("�μ�� ���带 �غ����� ���߽��ϴ�."); }); });
+    }
+    bindEvents();
+    renderAll();
+    scheduleSave();
+  </script>
+</body>
+</html>
+
