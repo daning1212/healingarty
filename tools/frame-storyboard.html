@@ -233,10 +233,32 @@
     }
     function blankScene(number) { return { id: uid(), title: "장면 " + number, shots: [blankShot()] }; }
     function blankProject() { return { id: uid(), title: "새 스토리보드", aspectRatio: "16:9", updatedAt: new Date().toISOString(), scenes: [blankScene(1)] }; }
+    function hasBrokenText(value) {
+      return typeof value === "string" && (value.indexOf("\uFFFD") !== -1 || value.indexOf("ï¿½") !== -1);
+    }
+    function repairSavedProject(saved) {
+      if (hasBrokenText(saved.title)) saved.title = "새 스토리보드";
+      if (hasBrokenText(saved.aspectRatio)) saved.aspectRatio = "16:9";
+      saved.scenes.forEach(function (scene, sceneIndex) {
+        if (!scene || typeof scene !== "object") return;
+        if (hasBrokenText(scene.title)) scene.title = "장면 " + (sceneIndex + 1);
+        if (!Array.isArray(scene.shots)) return;
+        scene.shots.forEach(function (shot, shotIndex) {
+          if (!shot || typeof shot !== "object") return;
+          if (hasBrokenText(shot.title)) shot.title = "새 컷 " + (shotIndex + 1);
+          if (hasBrokenText(shot.shotSize)) shot.shotSize = "미디엄";
+          ["action", "camera", "sound", "prompt", "notes"].forEach(function (field) {
+            if (hasBrokenText(shot[field])) shot[field] = "";
+          });
+          if (hasBrokenText(shot.assetName)) shot.assetName = "";
+        });
+      });
+      return saved;
+    }
     function loadProject() {
       try {
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
-        if (saved && Array.isArray(saved.scenes)) return saved;
+        if (saved && Array.isArray(saved.scenes)) return repairSavedProject(saved);
       } catch (_) {}
       return blankProject();
     }
