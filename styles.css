@@ -63,7 +63,7 @@
 .featured-play{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:46px;height:46px;border:1px solid #fff8;border-radius:50%;background:#111310da;color:white;font-size:14px}
 .featured-thumb:hover .featured-play,.featured-thumb:focus-visible .featured-play{color:var(--bg);background:var(--accent);border-color:var(--accent)}
 .featured-caption{padding:12px 13px 14px}
-.featured-caption h2{margin:2px 0 3px;font-size:clamp(15px,1.65vw,21px);line-height:1.3;letter-spacing:-.035em}
+.featured-caption h3{margin:2px 0 3px;font-size:clamp(15px,1.65vw,21px);line-height:1.3;letter-spacing:-.035em}
 .featured-caption p{margin:0;color:var(--muted);font-size:12px}
 .featured-caption .featured-category{color:var(--accent);font-size:11px;font-weight:650}
 .featured-external{display:inline-block;margin-top:8px;color:var(--muted);font-size:11px}
@@ -75,3 +75,27 @@
 .featured-dialog::backdrop{background:#000c}
 .featured-dialog button{display:block;margin:0 0 8px auto;padding:5px 12px;border:1px solid var(--line);border-radius:5px;background:var(--bg);color:var(--text);cursor:pointer}
 .featured-dialog iframe{display:block;width:100%;aspect-ratio:16/9;min-height:200px;max-height:calc(100dvh - 95px);border:0;background:#000}
+
+/* Open Workshop landing */
+.front-work{padding-top:clamp(24px,3.6vw,52px)}
+.front-heading{align-items:center;margin-bottom:20px}
+.front-heading h1{font-size:clamp(38px,5vw,65px)}
+.front-heading p{margin-top:8px}
+.workshop-diagram{display:flex;align-items:center}
+.workshop-diagram span{padding:8px 12px;border:1px solid #41483b;border-radius:6px;background:#20251e;color:var(--text);white-space:nowrap;font:12px ui-monospace,monospace}
+.workshop-diagram i{position:relative;width:27px;height:1px;background:var(--accent)}
+.workshop-diagram i::after{content:"";position:absolute;right:0;top:-2px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.quick-tools ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.quick-tools li{display:grid;grid-template-columns:84px minmax(0,1fr) auto;align-items:center;gap:15px;padding:8px 0;border-bottom:1px solid var(--line)}
+.quick-tools h2{font-size:17px;line-height:1.2;margin:0 0 3px}
+.quick-tools p{font-size:12px;line-height:1.35;color:var(--muted);margin:0}
+.tool-art{position:relative;height:42px;border-radius:4px;border:1px solid #ffffff23;overflow:hidden}
+.tool-art-camera{background:radial-gradient(circle at 60% 38%,#d4e4c2 0 7%,transparent 8%),linear-gradient(161deg,#283645 0 51%,#587260 52% 63%,#26453c 64% 100%)}
+.tool-art-camera::after{content:"";position:absolute;inset:7px 12px;border:1px solid #e2efdd91}
+.tool-art-browser{background:repeating-linear-gradient(90deg,transparent 0 22px,#252b24 22px 27px),linear-gradient(140deg,#55798a,#c0aa79 54%,#648459)}
+.tool-art-prompt{background-color:#364231;background-image:radial-gradient(circle,#d5ed82 1.7px,transparent 2px);background-size:13px 13px;background-position:center}
+.quick-install{border-radius:5px;padding:6px 11px;font-size:12px;font-weight:700;white-space:nowrap;background:var(--accent);color:var(--bg);text-align:center}
+.quick-install:hover{background:#e6f7ad}
+.quick-tools>.text-link{display:table;margin:8px 0 0 auto;font-size:12px}
+.featured-title{font-size:clamp(20px,3vw,29px);letter-spacing:-.05em;margin:16px 0 10px;line-height:1.2}
+@media(max-width:720px){.front-heading{align-items:start}.workshop-diagram{display:none}.quick-tools li{grid-template-columns:55px minmax(0,1fr) auto;gap:8px}.quick-tools h2{font-size:14px}.quick-install{padding:6px 7px;font-size:11px}}
