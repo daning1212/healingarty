@@ -101,8 +101,8 @@
 @media(max-width:720px){.front-heading{align-items:start}.workshop-diagram{display:none}.quick-tools li{grid-template-columns:55px minmax(0,1fr) auto;gap:8px}.quick-tools h2{font-size:14px}.quick-install{padding:6px 7px;font-size:11px}}
 
 @media (min-width:769px) and (max-width:1050px){
-  .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .service-grid article{padding-bottom:22px}
-  .service-grid article:nth-child(n+3){border-top:1px solid var(--line)}
-  .service-grid article:nth-child(odd){padding-left:0;border-left:0}
+  .service-grid article,.service-grid article+article{padding-inline:12px}
+  .service-grid article:first-child{padding-left:0}
+  .service-grid h3{font-size:20px;overflow-wrap:anywhere}
+  .service-grid p{overflow-wrap:anywhere}
 }
