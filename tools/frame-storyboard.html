@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#111310">
-  <meta name="description" content="PC���� �����ϴ� �������� �������� ���丮���� ����">
+  <meta name="description" content="PC에서 실행하는 오프라인 뮤직비디오 스토리보드 도구">
   <title>frame-storyboard</title>
   <style>
     :root {
@@ -150,65 +150,66 @@
   <header class="topbar">
     <div class="brand"><span class="brand-mark" aria-hidden="true"></span><div><strong>frame-storyboard</strong><small>LOCAL STORYBOARD TOOL</small></div></div>
     <div class="toolbar">
-      <span id="saveState" class="save-state" role="status">�� �������� ����</span>
-      <button id="newProject" class="button" type="button">�� ������Ʈ</button>
-      <button id="importProject" class="button" type="button">������Ʈ ����</button>
-      <button id="exportProject" class="button" type="button">ZIP���� ����</button>
-      <button id="printProject" class="button primary" type="button">�μ� �� PDF</button>
+      <span id="saveState" class="save-state" role="status">이 브라우저에 저장</span>
+      <button id="newProject" class="button" type="button">새 프로젝트</button>
+      <button id="importProject" class="button" type="button">프로젝트 열기</button>
+      <button id="exportProject" class="button" type="button">ZIP으로 저장</button>
+      <button id="exportJpg" class="button" type="button">현재 장면 JPG</button>
+      <button id="printProject" class="button primary" type="button">인쇄 · PDF</button>
     </div>
   </header>
 
   <div class="workspace">
-    <aside class="sidebar" aria-label="������Ʈ�� ���">
+    <aside class="sidebar" aria-label="프로젝트와 장면">
       <div class="project-fields">
-        <label class="label" for="projectTitle">������Ʈ</label>
-        <input id="projectTitle" type="text" maxlength="120" placeholder="������Ʈ �̸�">
-        <label class="label" for="aspectRatio">ȭ�� ����</label>
+        <label class="label" for="projectTitle">프로젝트</label>
+        <input id="projectTitle" type="text" maxlength="120" placeholder="프로젝트 이름">
+        <label class="label" for="aspectRatio">화면 비율</label>
         <select id="aspectRatio">
-          <option value="16:9">16:9 ����</option>
-          <option value="9:16">9:16 ����</option>
-          <option value="1:1">1:1 ���簢</option>
+          <option value="16:9">16:9 가로</option>
+          <option value="9:16">9:16 세로</option>
+          <option value="1:1">1:1 정사각</option>
           <option value="4:3">4:3</option>
         </select>
       </div>
-      <div class="section-title"><h2>��� ����</h2><button id="addScene" class="button small" type="button">�� ���</button></div>
+      <div class="section-title"><h2>장면 보드</h2><button id="addScene" class="button small" type="button">＋ 장면</button></div>
       <div id="sceneList" class="scene-list"></div>
-      <p class="sidebar-note">�۾� ������ �� �������� �ڵ� ����˴ϴ�. �ٸ� PC�� �ű�ų� ����� ���� ZIP���� �����ϼ���.</p>
+      <p class="sidebar-note">작업 내용은 이 브라우저에 자동 저장됩니다. 다른 PC로 옮기거나 백업할 때는 ZIP으로 저장하세요.</p>
     </aside>
 
     <main class="board-area">
       <div class="board-header">
-        <div><p class="eyebrow">STORYBOARD / <span id="sceneNumber">01</span></p><h1 id="sceneHeading">��� 1</h1><p id="shotCount">�� 0��</p></div>
+        <div><p class="eyebrow">STORYBOARD / <span id="sceneNumber">01</span></p><h1 id="sceneHeading">장면 1</h1><p id="shotCount">컷 0개</p></div>
         <div class="board-actions">
-          <button id="renameScene" class="button" type="button">��� �̸�</button>
-          <button id="deleteScene" class="button danger" type="button">��� ����</button>
-          <button id="addShot" class="button primary" type="button">�� �� �߰�</button>
+          <button id="renameScene" class="button" type="button">장면 이름</button>
+          <button id="deleteScene" class="button danger" type="button">장면 삭제</button>
+          <button id="addShot" class="button primary" type="button">＋ 컷 추가</button>
         </div>
       </div>
-      <section id="shotBoard" class="shot-board" aria-label="������ ����� ��"></section>
+      <section id="shotBoard" class="shot-board" aria-label="선택한 장면의 컷"></section>
     </main>
 
-    <aside class="inspector" aria-label="������ �� ����">
-      <h2 class="inspector-heading">�� ����</h2>
+    <aside class="inspector" aria-label="선택한 컷 편집">
+      <h2 class="inspector-heading">컷 정보</h2>
       <div id="inspectorContents">
-        <div class="image-preview" id="imagePreview">���� �����ϼ���</div>
+        <div class="image-preview" id="imagePreview">컷을 선택하세요</div>
         <div class="image-actions">
-          <button id="addImage" class="button small" type="button">���� �ֱ�</button>
-          <button id="removeImage" class="button small" type="button">���� ����</button>
+          <button id="addImage" class="button small" type="button">사진 넣기</button>
+          <button id="removeImage" class="button small" type="button">사진 빼기</button>
           <input id="imageFile" type="file" accept="image/*">
         </div>
-        <div class="field"><label class="label" for="shotTitle">�� ����</label><input id="shotTitle" data-field="title" maxlength="120" type="text"></div>
-        <div class="field"><label class="label" for="action">ȭ�鿡�� �Ͼ�� ��</label><textarea id="action" data-field="action" placeholder="�ι��� �ൿ�� ȭ�� ��ȭ�� �����ּ���."></textarea></div>
+        <div class="field"><label class="label" for="shotTitle">컷 제목</label><input id="shotTitle" data-field="title" maxlength="120" type="text"></div>
+        <div class="field"><label class="label" for="action">화면에서 일어나는 일</label><textarea id="action" data-field="action" placeholder="인물의 행동과 화면 변화를 적어주세요."></textarea></div>
         <div class="two-fields">
-          <div class="field"><label class="label" for="shotSize">�� ũ��</label><select id="shotSize" data-field="shotSize"><option>���̵�</option><option>Ǯ��</option><option>�̵��</option><option>Ŭ�����</option><option>������</option><option>��Ÿ</option></select></div>
-          <div class="field"><label class="label" for="duration">���� (��)</label><input id="duration" data-field="duration" type="number" min="0.5" max="600" step="0.5"></div>
+          <div class="field"><label class="label" for="shotSize">샷 크기</label><select id="shotSize" data-field="shotSize"><option>와이드</option><option>풀샷</option><option>미디엄</option><option>클로즈업</option><option>디테일</option><option>기타</option></select></div>
+          <div class="field"><label class="label" for="duration">길이 (초)</label><input id="duration" data-field="duration" type="number" min="0.5" max="600" step="0.5"></div>
         </div>
-        <div class="field"><label class="label" for="camera">ī�޶� �� ������</label><input id="camera" data-field="camera" type="text" placeholder="��: ����, õõ�� ������ �̵�"></div>
-        <div class="field"><label class="label" for="sound">��� �� �Ҹ� �� ����</label><textarea id="sound" data-field="sound" placeholder="���, ȿ����, �������"></textarea></div>
-        <div class="field"><label class="label" for="prompt">���� ������Ʈ</label><textarea id="prompt" class="prompt" data-field="prompt" placeholder="�ʿ��ϸ� ������ ���� ������Ʈ�� ����μ���."></textarea></div>
-        <div class="field"><label class="label" for="notes">�޸�</label><textarea id="notes" data-field="notes" placeholder="��ȯ, ��ǰ, ���� ���� ��"></textarea></div>
+        <div class="field"><label class="label" for="camera">카메라 · 움직임</label><input id="camera" data-field="camera" type="text" placeholder="예: 고정, 천천히 앞으로 이동"></div>
+        <div class="field"><label class="label" for="sound">대사 · 소리 · 음악</label><textarea id="sound" data-field="sound" placeholder="대사, 효과음, 배경음악"></textarea></div>
+        <div class="field"><label class="label" for="prompt">영상 프롬프트</label><textarea id="prompt" class="prompt" data-field="prompt" placeholder="필요하면 생성형 영상 프롬프트를 적어두세요."></textarea></div>
+        <div class="field"><label class="label" for="notes">메모</label><textarea id="notes" data-field="notes" placeholder="전환, 소품, 연기 지시 등"></textarea></div>
       </div>
-      <p class="hint">������ �ƿ� ������ �������� �����մϴ�. ZIP���� �����ϸ� ������Ʈ ������ ���� ������ �� ���Ϸ� ���Դϴ�.</p>
+      <p class="hint">사진은 컷에 연결해 브라우저에 보관합니다. ZIP으로 저장하면 프로젝트 정보와 원본 사진이 한 파일로 묶입니다.</p>
     </aside>
   </div>
 
@@ -228,10 +229,10 @@
 
     function uid() { return "id-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10); }
     function blankShot() {
-      return { id: uid(), title: "�� ��", duration: 5, shotSize: "�̵��", action: "", camera: "", sound: "", prompt: "", notes: "", assetId: null, assetName: "" };
+      return { id: uid(), title: "새 컷", duration: 5, shotSize: "미디엄", action: "", camera: "", sound: "", prompt: "", notes: "", assetId: null, assetName: "" };
     }
-    function blankScene(number) { return { id: uid(), title: "��� " + number, shots: [blankShot()] }; }
-    function blankProject() { return { id: uid(), title: "�� ���丮����", aspectRatio: "16:9", updatedAt: new Date().toISOString(), scenes: [blankScene(1)] }; }
+    function blankScene(number) { return { id: uid(), title: "장면 " + number, shots: [blankShot()] }; }
+    function blankProject() { return { id: uid(), title: "새 스토리보드", aspectRatio: "16:9", updatedAt: new Date().toISOString(), scenes: [blankScene(1)] }; }
     function loadProject() {
       try {
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
@@ -300,24 +301,24 @@
       return url;
     }
     function scheduleSave() {
-      document.getElementById("saveState").textContent = "���� �ߡ�";
+      document.getElementById("saveState").textContent = "저장 중…";
       clearTimeout(saveTimer);
       saveTimer = setTimeout(function () {
         try {
           project.updatedAt = new Date().toISOString();
           localStorage.setItem(STORAGE_KEY, JSON.stringify(project));
-          document.getElementById("saveState").textContent = "�� �������� �����";
+          document.getElementById("saveState").textContent = "이 브라우저에 저장됨";
         } catch (_) {
-          document.getElementById("saveState").textContent = "���� ���� ���� �� ZIP���� ����";
+          document.getElementById("saveState").textContent = "저장 공간 부족 · ZIP으로 저장";
         }
       }, 250);
     }
     function updateShotCardText(shot) {
       const card = document.querySelector('[data-shot-id="' + shot.id + '"]');
       if (!card) return;
-      card.querySelector(".shot-card-title").textContent = shot.title || "���� ���� ��";
-      card.querySelector(".shot-card-action").textContent = shot.action || "ȭ�� ������ �Է��ϼ���.";
-      card.querySelector(".shot-seconds").textContent = (shot.duration || 0) + "��";
+      card.querySelector(".shot-card-title").textContent = shot.title || "제목 없는 컷";
+      card.querySelector(".shot-card-action").textContent = shot.action || "화면 설명을 입력하세요.";
+      card.querySelector(".shot-seconds").textContent = (shot.duration || 0) + "초";
     }
     function renderSceneList() {
       const root = document.getElementById("sceneList");
@@ -327,7 +328,7 @@
         button.type = "button";
         button.className = "scene-item" + (scene.id === selectedSceneId ? " active" : "");
         button.dataset.sceneId = scene.id;
-        button.innerHTML = '<span class="scene-label"><strong>' + escapeHtml(scene.title) + '</strong><small>��� ' + String(index + 1).padStart(2, "0") + '</small></span><span class="scene-count">' + scene.shots.length + '��</span>';
+        button.innerHTML = '<span class="scene-label"><strong>' + escapeHtml(scene.title) + '</strong><small>장면 ' + String(index + 1).padStart(2, "0") + '</small></span><span class="scene-count">' + scene.shots.length + '컷</span>';
         root.appendChild(button);
       });
     }
@@ -335,14 +336,14 @@
       const scene = currentScene();
       const root = document.getElementById("shotBoard");
       root.innerHTML = "";
-      document.getElementById("sceneHeading").textContent = scene ? scene.title : "��� ����";
+      document.getElementById("sceneHeading").textContent = scene ? scene.title : "장면 없음";
       document.getElementById("sceneNumber").textContent = String(Math.max(0, project.scenes.indexOf(scene) + 1)).padStart(2, "0");
-      document.getElementById("shotCount").textContent = scene ? "�� " + scene.shots.length + "��" : "���ʿ��� ����� �߰��ϼ���.";
+      document.getElementById("shotCount").textContent = scene ? "컷 " + scene.shots.length + "개" : "왼쪽에서 장면을 추가하세요.";
       document.getElementById("addShot").disabled = !scene;
       document.getElementById("renameScene").disabled = !scene;
       document.getElementById("deleteScene").disabled = !scene;
       if (!scene) {
-        root.innerHTML = '<div class="empty-board"><div><h2>���� ����� �����ϴ�</h2><p>�� ����� ���� ù ���带 ���弼��.</p></div></div>';
+        root.innerHTML = '<div class="empty-board"><div><h2>아직 장면이 없습니다</h2><p>＋ 장면을 눌러 첫 보드를 만드세요.</p></div></div>';
         return;
       }
       for (let i = 0; i < scene.shots.length; i++) {
@@ -351,7 +352,7 @@
         card.className = "shot-card" + (shot.id === selectedShotId ? " selected" : "");
         card.dataset.shotId = shot.id;
         const image = await assetUrl(shot.assetId);
-        card.innerHTML = '<div class="shot-image">' + (image ? '<img alt="" src="' + image + '">' : '<div class="image-empty"><b>��</b>������ �־� ���� �ð�ȭ�ϼ���</div>') + '<span class="shot-number">CUT ' + String(i + 1).padStart(2, "0") + '</span></div><div class="shot-card-body"><h3 class="shot-card-title">' + escapeHtml(shot.title || "���� ���� ��") + '</h3><p class="shot-card-action">' + escapeHtml(shot.action || "ȭ�� ������ �Է��ϼ���.") + '</p><div class="shot-meta"><span>' + escapeHtml(shot.shotSize || "�̵��") + ' �� <span class="shot-seconds">' + escapeHtml(shot.duration || 0) + '��</span></span><span class="shot-controls"><button class="icon-button" type="button" data-action="up" aria-label="���� ����">��</button><button class="icon-button" type="button" data-action="down" aria-label="���� �Ʒ���">��</button><button class="icon-button" type="button" data-action="delete" aria-label="�� ����">��</button></span></div></div>';
+        card.innerHTML = '<div class="shot-image">' + (image ? '<img alt="" src="' + image + '">' : '<div class="image-empty"><b>＋</b>사진을 넣어 컷을 시각화하세요</div>') + '<span class="shot-number">CUT ' + String(i + 1).padStart(2, "0") + '</span></div><div class="shot-card-body"><h3 class="shot-card-title">' + escapeHtml(shot.title || "제목 없는 컷") + '</h3><p class="shot-card-action">' + escapeHtml(shot.action || "화면 설명을 입력하세요.") + '</p><div class="shot-meta"><span>' + escapeHtml(shot.shotSize || "미디엄") + ' · <span class="shot-seconds">' + escapeHtml(shot.duration || 0) + '초</span></span><span class="shot-controls"><button class="icon-button" type="button" data-action="up" aria-label="컷을 위로">↑</button><button class="icon-button" type="button" data-action="down" aria-label="컷을 아래로">↓</button><button class="icon-button" type="button" data-action="delete" aria-label="컷 삭제">×</button></span></div></div>';
         root.appendChild(card);
       }
     }
@@ -359,7 +360,7 @@
       const shot = currentShot();
       const contents = document.getElementById("inspectorContents");
       contents.classList.toggle("disabled", !shot);
-      document.querySelector(".inspector-heading").textContent = shot ? "�� ����" : "�� ���� �� ����� �����ϼ���";
+      document.querySelector(".inspector-heading").textContent = shot ? "컷 정보" : "컷 정보 · 장면을 선택하세요";
       const fields = ["title", "action", "shotSize", "duration", "camera", "sound", "prompt", "notes"];
       fields.forEach(function (field) {
         const control = document.querySelector('[data-field="' + field + '"]');
@@ -367,10 +368,10 @@
       });
       const preview = document.getElementById("imagePreview");
       if (!shot || !shot.assetId) {
-        preview.innerHTML = shot ? "�ƿ� ����� ������ �����ϴ�" : "���� �����ϼ���";
+        preview.innerHTML = shot ? "컷에 연결된 사진이 없습니다" : "컷을 선택하세요";
       } else {
         const url = await assetUrl(shot.assetId);
-        preview.innerHTML = url ? '<img alt="������ �� ����" src="' + url + '">' : "���� ������ ã�� �� �����ϴ�. ������Ʈ ZIP�� �ٽ� �ҷ�������.";
+        preview.innerHTML = url ? '<img alt="선택한 컷 사진" src="' + url + '">' : "사진 파일을 찾을 수 없습니다. 프로젝트 ZIP을 다시 불러오세요.";
       }
     }
     async function renderAll() {
@@ -398,7 +399,7 @@
       const scene = currentScene();
       if (!scene) return;
       const shot = blankShot();
-      shot.title = "�� �� " + (scene.shots.length + 1);
+      shot.title = "새 컷 " + (scene.shots.length + 1);
       scene.shots.push(shot);
       selectedShotId = shot.id;
       scheduleSave();
@@ -408,7 +409,7 @@
       const scene = currentScene();
       if (!scene) return;
       const cuts = scene.shots.length;
-      const message = "��" + scene.title + "�� ���� �� " + cuts + "���� �����ұ��? ����� ������ �� ������ ����ҿ��� ���ŵ˴ϴ�.";
+      const message = "“" + scene.title + "” 장면과 컷 " + cuts + "개를 삭제할까요? 연결된 사진도 이 브라우저 저장소에서 제거됩니다.";
       if (!window.confirm(message)) return;
       for (const shot of scene.shots) if (shot.assetId) await deleteAsset(shot.assetId);
       project.scenes = project.scenes.filter(function (item) { return item.id !== scene.id; });
@@ -417,19 +418,19 @@
       selectedShotId = next && next.shots[0] ? next.shots[0].id : null;
       scheduleSave();
       renderAll();
-      toast("����� �����߽��ϴ�.");
+      toast("장면을 삭제했습니다.");
     }
     async function removeShot(id) {
       const scene = currentScene();
       if (!scene) return;
       const shot = scene.shots.find(function (item) { return item.id === id; });
-      if (!shot || !window.confirm("�� �ư� ����� ������ �����ұ��?")) return;
+      if (!shot || !window.confirm("이 컷과 연결된 사진을 삭제할까요?")) return;
       if (shot.assetId) await deleteAsset(shot.assetId);
       scene.shots = scene.shots.filter(function (item) { return item.id !== id; });
       if (selectedShotId === id) selectedShotId = scene.shots[0]?.id || null;
       scheduleSave();
       renderAll();
-      toast("���� �����߽��ϴ�.");
+      toast("컷을 삭제했습니다.");
     }
     function moveShot(id, direction) {
       const scene = currentScene();
@@ -526,13 +527,13 @@
       for (let i = bytes.length - 22; i >= Math.max(0, bytes.length - 65557); i--) {
         if (view.getUint32(i, true) === 0x06054b50) { endOffset = i; break; }
       }
-      if (endOffset < 0) throw new Error("ZIP �� ������ ã�� ���߽��ϴ�.");
+      if (endOffset < 0) throw new Error("ZIP 끝 정보를 찾지 못했습니다.");
       const count = view.getUint16(endOffset + 10, true);
       let cursor = view.getUint32(endOffset + 16, true);
       const decoder = new TextDecoder();
       const files = new Map();
       for (let i = 0; i < count; i++) {
-        if (view.getUint32(cursor, true) !== 0x02014b50) throw new Error("�ùٸ��� ���� ZIP �����Դϴ�.");
+        if (view.getUint32(cursor, true) !== 0x02014b50) throw new Error("올바르지 않은 ZIP 파일입니다.");
         const method = view.getUint16(cursor + 10, true);
         const size = view.getUint32(cursor + 24, true);
         const nameLength = view.getUint16(cursor + 28, true);
@@ -540,7 +541,7 @@
         const commentLength = view.getUint16(cursor + 32, true);
         const localOffset = view.getUint32(cursor + 42, true);
         const name = decoder.decode(bytes.slice(cursor + 46, cursor + 46 + nameLength));
-        if (method !== 0) throw new Error("����� ZIP�� �� �� �����ϴ�. �� �������� ���� ������Ʈ ZIP�� ������ �ּ���.");
+        if (method !== 0) throw new Error("압축된 ZIP은 열 수 없습니다. 이 도구에서 만든 프로젝트 ZIP을 선택해 주세요.");
         const localNameLength = view.getUint16(localOffset + 26, true);
         const localExtraLength = view.getUint16(localOffset + 28, true);
         const dataStart = localOffset + 30 + localNameLength + localExtraLength;
@@ -550,7 +551,7 @@
       return files;
     }
     function safeName(value) {
-      return String(value || "image").replace(/[^a-zA-Z0-9��-�R._-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 70) || "image";
+      return String(value || "image").replace(/[^a-zA-Z0-9가-힣._-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 70) || "image";
     }
     function download(blob, filename) {
       const url = URL.createObjectURL(blob);
@@ -580,18 +581,18 @@
       files.unshift({ name: "project.json", data: encoder.encode(JSON.stringify(copy, null, 2)) });
       const archive = await zipStore(files);
       download(archive, safeName(project.title) + ".frame.zip");
-      toast("������ ���Ե� ������Ʈ ZIP�� �����߽��ϴ�.");
+      toast("사진이 포함된 프로젝트 ZIP을 저장했습니다.");
     }
     async function importProject(file) {
       if (!file) return;
-      if (localStorage.getItem(STORAGE_KEY) && !window.confirm("���� �۾��� �ҷ��� ������Ʈ�� �ٲܱ��? ���� ���� �۾��� ZIP���� ������ �� �ֽ��ϴ�.")) return;
+      if (localStorage.getItem(STORAGE_KEY) && !window.confirm("현재 작업을 불러온 프로젝트로 바꿀까요? 먼저 기존 작업을 ZIP으로 저장할 수 있습니다.")) return;
       let imported;
       if (file.name.toLowerCase().endsWith(".json")) {
         imported = JSON.parse(await file.text());
       } else {
         const files = await unzipStore(file);
         const projectBytes = files.get("project.json");
-        if (!projectBytes) throw new Error("project.json�� ���� ZIP�Դϴ�.");
+        if (!projectBytes) throw new Error("project.json이 없는 ZIP입니다.");
         imported = JSON.parse(new TextDecoder().decode(projectBytes));
         for (const scene of imported.scenes || []) {
           for (const shot of scene.shots || []) {
@@ -607,29 +608,145 @@
           }
         }
       }
-      if (!imported || !Array.isArray(imported.scenes)) throw new Error("���丮���� ������Ʈ ������ �ƴմϴ�.");
+      if (!imported || !Array.isArray(imported.scenes)) throw new Error("스토리보드 프로젝트 파일이 아닙니다.");
       project = imported;
       selectedSceneId = project.scenes[0]?.id || null;
       selectedShotId = project.scenes[0]?.shots[0]?.id || null;
       scheduleSave();
       await renderAll();
-      toast("������Ʈ�� ������ �ҷ��Խ��ϴ�.");
+      toast("프로젝트와 사진을 불러왔습니다.");
     }
     async function printProject() {
       const area = document.getElementById("printArea");
-      let html = '<h1>' + escapeHtml(project.title) + '</h1><p class="print-meta">' + escapeHtml(project.aspectRatio) + ' �� ' + project.scenes.length + '�� ���</p>';
+      let html = '<h1>' + escapeHtml(project.title) + '</h1><p class="print-meta">' + escapeHtml(project.aspectRatio) + ' · ' + project.scenes.length + '개 장면</p>';
       for (let si = 0; si < project.scenes.length; si++) {
         const scene = project.scenes[si];
         html += '<h2>' + escapeHtml(scene.title) + '</h2><div class="print-grid">';
         for (let ci = 0; ci < scene.shots.length; ci++) {
           const shot = scene.shots[ci];
           const src = await assetUrl(shot.assetId);
-          html += '<article class="print-shot">' + (src ? '<img src="' + src + '" alt="">' : '') + '<h3>' + String(ci + 1).padStart(2, "0") + ' �� ' + escapeHtml(shot.title) + ' �� ' + escapeHtml(shot.duration) + '��</h3><p>' + escapeHtml(shot.action) + '</p><p>ī�޶�: ' + escapeHtml(shot.camera) + '</p><p>�Ҹ�: ' + escapeHtml(shot.sound) + '</p><p>������Ʈ: ' + escapeHtml(shot.prompt) + '</p></article>';
+          html += '<article class="print-shot">' + (src ? '<img src="' + src + '" alt="">' : '') + '<h3>' + String(ci + 1).padStart(2, "0") + ' · ' + escapeHtml(shot.title) + ' · ' + escapeHtml(shot.duration) + '초</h3><p>' + escapeHtml(shot.action) + '</p><p>카메라: ' + escapeHtml(shot.camera) + '</p><p>소리: ' + escapeHtml(shot.sound) + '</p><p>프롬프트: ' + escapeHtml(shot.prompt) + '</p></article>';
         }
         html += '</div>';
       }
       area.innerHTML = html;
       window.print();
+    }
+    function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
+      const words = String(text || "—").trim().split(/\s+/);
+      let line = "";
+      let lines = 0;
+      for (const word of words) {
+        const candidate = line ? line + " " + word : word;
+        if (ctx.measureText(candidate).width > maxWidth && line) {
+          ctx.fillText(line, x, y + lines * lineHeight);
+          lines++;
+          line = word;
+          if (lines >= maxLines) return y + lines * lineHeight;
+        } else {
+          line = candidate;
+        }
+      }
+      if (line && lines < maxLines) {
+        ctx.fillText(line, x, y + lines * lineHeight);
+        lines++;
+      }
+      return y + lines * lineHeight;
+    }
+    function loadCanvasImage(url) {
+      return new Promise(function (resolve) {
+        const image = new Image();
+        image.onload = function () { resolve(image); };
+        image.onerror = function () { resolve(null); };
+        image.src = url;
+      });
+    }
+    function drawImageContain(ctx, image, x, y, width, height) {
+      const scale = Math.min(width / image.naturalWidth, height / image.naturalHeight);
+      const drawWidth = image.naturalWidth * scale;
+      const drawHeight = image.naturalHeight * scale;
+      ctx.drawImage(image, x + (width - drawWidth) / 2, y + (height - drawHeight) / 2, drawWidth, drawHeight);
+    }
+    async function exportSceneJpg() {
+      const scene = currentScene();
+      if (!scene) { alert("먼저 장면을 선택해 주세요."); return; }
+      const width = 1800;
+      const margin = 64;
+      const gap = 28;
+      const columns = 2;
+      const cardWidth = (width - margin * 2 - gap) / columns;
+      const parts = String(project.aspectRatio || "16:9").split(":").map(Number);
+      const ratio = parts[0] > 0 && parts[1] > 0 ? parts[1] / parts[0] : 9 / 16;
+      const imageHeight = Math.min(cardWidth * ratio, 520);
+      const bodyHeight = 230;
+      const cardHeight = imageHeight + bodyHeight;
+      const rows = Math.max(1, Math.ceil(scene.shots.length / columns));
+      const headerHeight = 190;
+      const height = margin + headerHeight + rows * cardHeight + (rows - 1) * gap + margin;
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) throw new Error("이미지 캔버스를 만들 수 없습니다.");
+      ctx.fillStyle = "#f4f5ef";
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = "#62703c";
+      ctx.font = "700 20px system-ui, sans-serif";
+      ctx.fillText("FRAME STORYBOARD", margin, margin + 10);
+      ctx.fillStyle = "#20231c";
+      ctx.font = "700 42px system-ui, sans-serif";
+      ctx.fillText(String(project.title || "스토리보드").slice(0, 50), margin, margin + 66);
+      ctx.font = "600 28px system-ui, sans-serif";
+      ctx.fillText(String(scene.title || "장면").slice(0, 50), margin, margin + 112);
+      ctx.fillStyle = "#66705e";
+      ctx.font = "18px system-ui, sans-serif";
+      ctx.fillText(project.aspectRatio + "  ·  " + scene.shots.length + "컷  ·  " + new Date().toLocaleDateString("ko-KR"), margin, margin + 148);
+      for (let i = 0; i < scene.shots.length; i++) {
+        const shot = scene.shots[i];
+        const col = i % columns;
+        const row = Math.floor(i / columns);
+        const x = margin + col * (cardWidth + gap);
+        const y = margin + headerHeight + row * (cardHeight + gap);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(x, y, cardWidth, cardHeight);
+        ctx.strokeStyle = "#d4d8cd";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(x, y, cardWidth, cardHeight);
+        ctx.fillStyle = "#e6e9df";
+        ctx.fillRect(x + 1, y + 1, cardWidth - 2, imageHeight);
+        if (shot.assetId) {
+          const url = await assetUrl(shot.assetId);
+          const image = url ? await loadCanvasImage(url) : null;
+          if (image) drawImageContain(ctx, image, x + 8, y + 8, cardWidth - 16, imageHeight - 16);
+          else {
+            ctx.fillStyle = "#626957";
+            ctx.font = "20px system-ui, sans-serif";
+            ctx.fillText("사진을 불러올 수 없습니다", x + 26, y + imageHeight / 2);
+          }
+        } else {
+          ctx.fillStyle = "#748064";
+          ctx.font = "24px system-ui, sans-serif";
+          ctx.fillText("사진 없음", x + 26, y + imageHeight / 2);
+        }
+        const textX = x + 24;
+        const textWidth = cardWidth - 48;
+        let textY = y + imageHeight + 35;
+        ctx.fillStyle = "#1d2119";
+        ctx.font = "700 22px system-ui, sans-serif";
+        ctx.fillText("CUT " + String(i + 1).padStart(2, "0") + "  ·  " + String(shot.duration || 0) + "초  ·  " + String(shot.shotSize || ""), textX, textY);
+        textY += 34;
+        ctx.font = "700 24px system-ui, sans-serif";
+        textY = wrapCanvasText(ctx, shot.title || "제목 없는 컷", textX, textY, textWidth, 30, 1) + 30;
+        ctx.fillStyle = "#33392d";
+        ctx.font = "17px system-ui, sans-serif";
+        textY = wrapCanvasText(ctx, "액션: " + (shot.action || "—"), textX, textY, textWidth, 23, 2) + 27;
+        textY = wrapCanvasText(ctx, "카메라: " + (shot.camera || "—"), textX, textY, textWidth, 22, 1) + 25;
+        wrapCanvasText(ctx, "소리: " + (shot.sound || "—"), textX, textY, textWidth, 22, 1);
+      }
+      const blob = await new Promise(function (resolve) { canvas.toBlob(resolve, "image/jpeg", 0.92); });
+      if (!blob) throw new Error("JPG 파일을 만들지 못했습니다.");
+      download(blob, safeName(project.title) + "-" + safeName(scene.title) + ".jpg");
+      toast("현재 장면을 JPG로 저장했습니다.");
     }
     function bindEvents() {
       document.getElementById("projectTitle").addEventListener("input", function (event) { project.title = event.target.value; scheduleSave(); });
@@ -659,7 +776,7 @@
       document.getElementById("renameScene").addEventListener("click", function () {
         const scene = currentScene();
         if (!scene) return;
-        const title = window.prompt("��� �̸�", scene.title);
+        const title = window.prompt("장면 이름", scene.title);
         if (title == null) return;
         scene.title = title.trim() || scene.title;
         scheduleSave(); renderAll();
@@ -669,37 +786,38 @@
         const file = event.target.files && event.target.files[0];
         const shot = currentShot();
         if (!file || !shot) return;
-        if (!file.type.startsWith("image/")) { alert("�̹��� ������ ������ �ּ���."); event.target.value = ""; return; }
+        if (!file.type.startsWith("image/")) { alert("이미지 파일을 선택해 주세요."); event.target.value = ""; return; }
         try {
           if (shot.assetId) await deleteAsset(shot.assetId);
           const id = uid();
           await putAsset(id, file);
           shot.assetId = id; shot.assetName = file.name;
-          scheduleSave(); await renderAll(); toast("������ �ƿ� �־����ϴ�.");
+          scheduleSave(); await renderAll(); toast("사진을 컷에 넣었습니다.");
         } catch (error) {
-          alert("������ �������� ���߽��ϴ�. �������� ���� ���� ������ Ȯ���� �ּ���.");
+          alert("사진을 저장하지 못했습니다. 브라우저의 로컬 저장 공간을 확인해 주세요.");
         }
         event.target.value = "";
       });
       document.getElementById("removeImage").addEventListener("click", async function () {
         const shot = currentShot();
-        if (!shot || !shot.assetId || !window.confirm("�� �ƿ��� ������ ���� ������ ����ҿ����� �����ұ��?")) return;
+        if (!shot || !shot.assetId || !window.confirm("이 컷에서 사진을 빼고 브라우저 저장소에서도 삭제할까요?")) return;
         await deleteAsset(shot.assetId); shot.assetId = null; shot.assetName = "";
-        scheduleSave(); await renderAll(); toast("������ �����߽��ϴ�.");
+        scheduleSave(); await renderAll(); toast("사진을 제거했습니다.");
       });
       document.getElementById("newProject").addEventListener("click", function () {
-        if (!window.confirm("���� ������Ʈ�� �� ������Ʈ�� �ٲܱ��? ������ ���Ե� ZIP���� ���� ������ �� �ֽ��ϴ�.")) return;
+        if (!window.confirm("현재 프로젝트를 새 프로젝트로 바꿀까요? 사진이 포함된 ZIP으로 먼저 저장할 수 있습니다.")) return;
         project = blankProject(); selectedSceneId = project.scenes[0].id; selectedShotId = project.scenes[0].shots[0].id;
         scheduleSave(); renderAll();
       });
-      document.getElementById("exportProject").addEventListener("click", function () { exportProject().catch(function (error) { alert("������Ʈ ZIP�� ������ ���߽��ϴ�: " + error.message); }); });
+      document.getElementById("exportProject").addEventListener("click", function () { exportProject().catch(function (error) { alert("프로젝트 ZIP을 만들지 못했습니다: " + error.message); }); });
+      document.getElementById("exportJpg").addEventListener("click", function () { exportSceneJpg().catch(function (error) { alert("JPG를 만들지 못했습니다: " + error.message); }); });
       document.getElementById("importProject").addEventListener("click", function () { document.getElementById("importFile").click(); });
       document.getElementById("importFile").addEventListener("change", function (event) {
         const file = event.target.files && event.target.files[0];
-        if (file) importProject(file).catch(function (error) { alert("������Ʈ�� ���� ���߽��ϴ�: " + error.message); });
+        if (file) importProject(file).catch(function (error) { alert("프로젝트를 열지 못했습니다: " + error.message); });
         event.target.value = "";
       });
-      document.getElementById("printProject").addEventListener("click", function () { printProject().catch(function () { alert("�μ�� ���带 �غ����� ���߽��ϴ�."); }); });
+      document.getElementById("printProject").addEventListener("click", function () { printProject().catch(function () { alert("인쇄용 보드를 준비하지 못했습니다."); }); });
     }
     bindEvents();
     renderAll();
@@ -707,4 +825,3 @@
   </script>
 </body>
 </html>
-
