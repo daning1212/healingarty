@@ -6,7 +6,7 @@
   <meta name="description" content="AI 영상과 작곡 포트폴리오, 직접 만든 ComfyUI 노드와 창작 도구를 한곳에서 만나보세요.">
   <meta name="theme-color" content="#111310">
   <title>HealingArty — 작업과 도구</title>
-  <link rel="stylesheet" href="styles.css?v=hero-title-motion">
+  <link rel="stylesheet" href="styles.css?v=hero-title-replay">
   <script src="script.js" defer></script>
 </head>
 <body class="workshop-home">
@@ -26,6 +26,7 @@
         <div class="front-heading">
           <div>
             <h1 class="hero-title"><span class="hero-title-words"><span>사진,</span> <span>영상,</span> <span>음악.</span></span><br><span class="hero-title-path"><mark>모든 것은 하나의 길로.</mark></span></h1>
+            <button type="button" id="heroReplay" class="hero-replay" hidden>↻ 제목 효과 다시 보기</button>
             <p>사진과 그래픽에서 시작해 광고를 만들었습니다.<br>이제는 AI와 함께, 그 길 위에서 새로운 장면과 음악을 만듭니다.</p>
           </div>
         </div>
@@ -250,5 +251,16 @@
     <section class="container contact" id="contact"><p class="eyebrow">05 / LET’S MAKE SOMETHING</p><h2>어떤 이야기를<br><em>함께 만들까요?</em></h2><p>작업과 협업에 관한 이야기는<br>인스타그램 메시지로 편하게 보내주세요.</p><a class="button primary" href="https://www.instagram.com/healing_arty" target="_blank" rel="noopener noreferrer">Instagram에서 문의하기 ↗</a><span class="contact-note">프로필을 열고 메시지 버튼을 눌러주세요.</span></section>
   </main>
   <footer class="footer"><div class="container footer-content"><p>© <span id="year">2026</span> HealingArty</p><div><a href="https://www.youtube.com/@healingArty" target="_blank" rel="noopener noreferrer">YouTube ↗</a><a href="https://www.instagram.com/healing_arty" target="_blank" rel="noopener noreferrer">Instagram ↗</a><a href="https://github.com/daning1212" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="#home">맨 위로 ↑</a></div></div></footer>
+  <script>
+    const heroReplay = document.getElementById('heroReplay');
+    const heroTitle = document.querySelector('.hero-title');
+    heroReplay.hidden = false;
+    heroReplay.addEventListener('click', () => {
+      heroTitle.classList.remove('hero-replaying');
+      heroTitle.classList.add('hero-reset');
+      void heroTitle.offsetWidth;
+      heroTitle.classList.replace('hero-reset', 'hero-replaying');
+    });
+  </script>
 </body>
 </html>
