@@ -125,6 +125,9 @@
 .toy-preview-picox{color:#78f5a0;background:#071810}
 .toy-preview-picox span{display:block;white-space:nowrap}
 .toy-preview-picox i{display:inline-block;width:5px;height:7px;background:#78f5a0}
+.toy-preview-jongbu{display:grid;place-items:center;padding:0;background:#211d21 url("toys/jongbu-logo.jpg") center/auto 115% no-repeat}
+.toy-preview-jongbu b{transform:translate(5px,-1px) rotate(-7deg);font:900 clamp(17px,2.4vw,23px)/1 "Noto Serif CJK KR",Batang,serif;letter-spacing:.08em;color:#710c15;text-shadow:1px 1px #38070b,2px 0 #b6292888,0 0 4px #ffe2b9}
+.toy-demo{display:inline-block;margin-inline-start:3px;padding:2px 4px;border:1px solid #98645d;border-radius:3px;color:#ffb8aa;font:700 10px/1.15 ui-monospace,monospace;vertical-align:middle}
 .toy-play{background:var(--accent);color:var(--bg);padding:6px 9px;border-radius:5px;font-size:11px;font-weight:750;white-space:nowrap}
 .toy-play:hover{background:#e6f7ad}
 @media(max-width:880px){.toy-grid{grid-template-columns:1fr}}
