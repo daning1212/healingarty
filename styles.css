@@ -200,3 +200,11 @@
   21%,94%{opacity:1;clip-path:inset(0)}
   100%{opacity:0;clip-path:inset(0)}
 }
+
+@media(max-width:620px){
+  .toy-card.toy-card-orbit{grid-template-columns:minmax(82px,105px) minmax(0,1fr);gap:10px;padding:10px}
+  .toy-card-orbit .toy-copy p{word-break:keep-all}
+  .toy-card-orbit .toy-actions{grid-column:1/-1;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;justify-items:stretch;gap:6px}
+  .toy-card-orbit .toy-actions>small{grid-column:1/-1;grid-row:2}
+  .toy-card-orbit .toy-actions>a,.toy-card-orbit .toy-copy-link{display:grid;place-items:center;min-height:44px}
+}
