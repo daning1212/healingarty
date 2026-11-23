@@ -154,10 +154,18 @@
 
 @media(min-width:769px){.service-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
 
-.hero-title-words{display:inline-block;transform:translateY(-.14em)}
+.front-heading{margin-bottom:clamp(29px,4vw,51px)}
+.front-heading>div{min-width:0}
+.front-heading .hero-title{
+  display:grid;justify-items:start;gap:.17em;
+  font-size:clamp(31px,5vw,65px);line-height:1.14;
+}
+.front-heading p{margin-top:clamp(17px,2vw,25px);line-height:1.65}
 .hero-title-words>span{display:inline-block}
-.hero-title-path{display:inline-block;max-width:100%}
-.hero-title-path mark{background:var(--accent);color:var(--bg);padding:.02em .14em .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hero-title-path{display:block;max-width:100%}
+.hero-title-path mark{
+  display:block;background:var(--accent);color:var(--bg);padding:.075em .15em .105em;
+}
 @media(prefers-reduced-motion:no-preference){
   .hero-title-words>span{animation:hero-word-first 7s ease-out infinite}
   .hero-title-words>span:nth-child(2){animation-name:hero-word-second}
@@ -165,22 +173,22 @@
   .hero-title-path{animation:hero-path-loop 7s ease-out infinite}
 }
 @keyframes hero-word-first{
-  0%{opacity:0;transform:translateY(.34em)}
+  0%{opacity:0;transform:translateY(.16em)}
   7%,94%{opacity:1;transform:translateY(0)}
   100%{opacity:0;transform:translateY(0)}
 }
 @keyframes hero-word-second{
-  0%,2.5%{opacity:0;transform:translateY(.34em)}
+  0%,2.5%{opacity:0;transform:translateY(.16em)}
   9.5%,94%{opacity:1;transform:translateY(0)}
   100%{opacity:0;transform:translateY(0)}
 }
 @keyframes hero-word-third{
-  0%,5%{opacity:0;transform:translateY(.34em)}
+  0%,5%{opacity:0;transform:translateY(.16em)}
   12%,94%{opacity:1;transform:translateY(0)}
   100%{opacity:0;transform:translateY(0)}
 }
 @keyframes hero-path-loop{
-  0%,12%{opacity:1;clip-path:inset(-.08em 100% -.15em 0)}
-  21%,94%{opacity:1;clip-path:inset(-.08em 0 -.15em 0)}
-  100%{opacity:0;clip-path:inset(-.08em 0 -.15em 0)}
+  0%,12%{opacity:1;clip-path:inset(0 100% 0 0)}
+  21%,94%{opacity:1;clip-path:inset(0)}
+  100%{opacity:0;clip-path:inset(0)}
 }
