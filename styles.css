@@ -122,23 +122,20 @@
   position:relative;isolation:isolate;height:76px;padding:0;display:flex;align-items:center;
   background:radial-gradient(ellipse at 85% 28%,#205977,transparent 68%),#0b1628;
 }
-.toy-preview-orbit b{
-  position:relative;z-index:1;margin-left:8px;color:#ecfaff;
-  font:900 italic 18px/.95 system-ui,sans-serif;letter-spacing:-.045em;
-  text-shadow:0 1px 4px #000,0 0 8px #5acffa80;
+.toy-orbit-logo{
+  position:relative;z-index:1;display:block;width:61%;height:auto;margin-left:3px;
+  filter:drop-shadow(0 1px 4px #09101c);
 }
 .toy-preview-orbit span{position:absolute;inset:0 0 0 54%;overflow:hidden}
-.toy-preview-orbit img{
+.toy-preview-orbit span img{
   position:absolute;width:120px;max-width:none;height:auto;left:50%;top:2px;
   transform:translateX(-50%);
 }
 @media(max-width:420px){
   .toy-card.toy-card-orbit{grid-template-columns:108px minmax(0,1fr) auto}
-  .toy-preview-orbit b{font-size:14px;margin-left:5px}
   .toy-preview-orbit span{left:50%}
-  .toy-preview-orbit img{width:101px}
+  .toy-preview-orbit span img{width:101px}
 }
-
 .toy-preview-artex{color:#c9dbfa;background:linear-gradient(150deg,#1b2743,#14192b)}
 .toy-agents{display:flex;gap:4px;margin-top:5px}
 .toy-agents span{color:#aacfff;background:#263d60;border:1px solid #587ba3;border-radius:3px;text-align:center;flex:1;padding:2px;font-size:13px}
