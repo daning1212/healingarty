@@ -80,3 +80,19 @@ document.querySelectorAll('.toy-copy-link').forEach((button) => {
     }
   });
 });
+
+const orbitPreview = document.querySelector('.toy-preview-orbit');
+const orbitVideo = orbitPreview.querySelector('.toy-orbit-video');
+
+orbitPreview.addEventListener('pointerenter', (event) => {
+  if (event.pointerType !== 'mouse') return;
+  orbitVideo.play().catch(() => {});
+});
+orbitVideo.addEventListener('playing', () => {
+  orbitPreview.classList.add('is-playing');
+});
+orbitPreview.addEventListener('pointerleave', () => {
+  orbitPreview.classList.remove('is-playing');
+  orbitVideo.pause();
+  if (orbitVideo.currentTime > 0) orbitVideo.currentTime = 0;
+});
