@@ -6,8 +6,8 @@
   <meta name="description" content="AI 영상과 작곡 포트폴리오, 직접 만든 ComfyUI 노드와 창작 도구를 한곳에서 만나보세요.">
   <meta name="theme-color" content="#111310">
   <title>HealingArty — 작업과 도구</title>
-  <link rel="stylesheet" href="styles.css?v=hero-spacing">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=play-sections">
+  <script src="script.js?v=play-sections" defer></script>
 </head>
 <body class="workshop-home">
   <a class="skip-link" href="#main">본문으로 이동</a>
@@ -16,7 +16,7 @@
       <a class="brand" href="#home" aria-label="힐링아티 홈"><img src="healingarty-header-logo.png" width="620" height="116" alt="HealingArty — Photographer &amp; Content Creator" style="display:block;width:clamp(168px,18vw,200px);height:auto"></a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation">메뉴 <span aria-hidden="true">＋</span></button>
       <nav id="navigation" aria-label="주 메뉴">
-        <a href="#portfolio">작업 보기</a><a href="#tools">만든 도구</a><a href="#services">제작 분야</a><a href="#about">소개</a><a class="nav-contact" href="#contact">함께 만들기 <span aria-hidden="true">↗</span></a>
+        <a href="#portfolio">작업 보기</a><a href="#tools">만든 도구</a><a href="#games">게임</a><a href="#digital-toys">디지털 토이</a><a href="#services">제작 분야</a><a href="#about">소개</a><a class="nav-contact" href="#contact">함께 만들기 <span aria-hidden="true">↗</span></a>
       </nav>
     </div>
   </header>
@@ -102,8 +102,8 @@
     </section>
     <section class="tools-section" id="tools" aria-labelledby="tools-title">
       <div class="container">
-        <div class="section-heading"><div><p class="eyebrow">02 / CREATIVE TOOLS</p><h2 id="tools-title"><em style="color:var(--accent);font-style:normal">직접</em> 만든 도구</h2></div><p>ComfyUI 노드, 브라우저 도구, 디지털 토이, 연구 프로젝트.</p></div>
-        <div class="tool-category-links" aria-label="도구 분류"><a href="#tools-comfyui">ComfyUI 노드 <span>04</span></a><a href="#tools-html">HTML 도구 <span>04</span></a><a href="#digital-toys">디지털 토이 <span>04</span></a><a href="#tools-research">연구 <span>01</span></a></div>
+        <div class="section-heading"><div><p class="eyebrow">02 / CREATIVE TOOLS</p><h2 id="tools-title"><em style="color:var(--accent);font-style:normal">직접</em> 만든 도구</h2></div><p>ComfyUI 노드, 브라우저 도구, 연구 프로젝트.</p></div>
+        <div class="tool-category-links" aria-label="도구 분류"><a href="#tools-comfyui">ComfyUI 노드 <span>04</span></a><a href="#tools-html">HTML 도구 <span>04</span></a><a href="#tools-research">연구 <span>01</span></a></div>
         <div class="tool-group" id="tools-comfyui">
           <div class="tool-group-heading"><div><h3>ComfyUI 노드</h3></div><p>이미지 탐색부터 프롬프트와 LoRA 선택까지.</p></div>
           <table class="tool-table"><caption class="visually-hidden">ComfyUI 노드 프로그램 목록</caption><thead><tr><th scope="col">프로그램</th><th scope="col">어떤 도구인가요?</th><th scope="col">사용 · 소스</th></tr></thead><tbody>
@@ -124,56 +124,6 @@
             <tr><th scope="row"><span class="tool-row-number">04</span><a class="tool-title" href="https://github.com/daning1212/frame-storyboard" target="_blank" rel="noopener noreferrer">FRAME-STORYBOARD</a><span class="tool-subtitle">뮤직비디오 스토리보드</span></th><td class="tool-description">HTML을 내려받아 PC에서 실행합니다. 컷에 사진과 연출 정보를 넣고 ZIP 또는 JPG로 저장할 수 있습니다.</td><td class="tool-row-links"><a class="tool-use-link" href="tools/frame-storyboard.html" download="frame-storyboard.html">HTML 다운로드 ↓</a><a class="tool-source-link" href="https://github.com/daning1212/frame-storyboard" target="_blank" rel="noopener noreferrer">GitHub ↗</a></td></tr>
           </tbody></table>
         </div>
-        <section class="digital-toys" id="digital-toys" aria-labelledby="digital-toys-title">
-          <div class="section-heading">
-            <h2 id="digital-toys-title"><em>DIGITAL</em> TOYS</h2>
-            <p>재미로 만든 작은 브라우저 장난감.<br>PC에서는 PLAY를 누른 뒤 <kbd>F11</kbd>로 전체 화면을 켜보세요.</p>
-          </div>
-          <div class="toy-grid">
-            <article class="toy-card">
-              <div class="toy-preview toy-preview-artex" aria-hidden="true">
-                <b>ARTEX / WORKSHOP</b><div class="toy-agents"><span>✦</span><span>◈</span><span>✳</span></div>
-              </div>
-              <div class="toy-copy"><h3>ARTEX</h3><p>친구 앞에서 에이전트 팀을 능숙하게 지휘하는 척해 보세요. 작업 하나 던져주면 가상 에이전트들이 알아서 움직여요.</p></div>
-              <div style="display:grid;gap:6px;justify-items:center;text-align:center">
-                <a class="toy-play" href="toys/artex.html" target="_blank" rel="noopener noreferrer" aria-label="ARTEX 플레이">PLAY ↗</a>
-                <a href="toys/artex.html" download="ARTEX-V2.html" aria-label="ARTEX HTML 다운로드" style="font-size:11px;color:var(--muted);white-space:nowrap">다운로드 ↓</a>
-              </div>
-            </article>
-            <article class="toy-card">
-              <div class="toy-preview toy-preview-picox" aria-hidden="true">
-                <b>PICOX / CONSOLE</b><span>[INIT] NODE ONLINE</span><span>[SYNC] MOCK LEDGER</span><span>&gt; <i></i></span>
-              </div>
-              <div class="toy-copy"><h3>PICOX</h3><p>녹색 로그를 띄우고 친구 앞에서 영화 속 해커처럼 연기해 보세요. 화면에 흐르는 건 전부 가상 로그예요.</p></div>
-              <div style="display:grid;gap:6px;justify-items:center;text-align:center">
-                <a class="toy-play" href="toys/picox.html" target="_blank" rel="noopener noreferrer" aria-label="PICOX 플레이">PLAY ↗</a>
-                <a href="toys/picox.html" download="PICOX-Demo-Console.html" aria-label="PICOX HTML 다운로드" style="font-size:11px;color:var(--muted);white-space:nowrap">다운로드 ↓</a>
-              </div>
-            </article>
-            <article class="toy-card toy-card-orbit">
-              <div class="toy-preview toy-preview-orbit" aria-hidden="true">
-                <img class="toy-orbit-logo" src="https://raw.githubusercontent.com/daning1212/orbit-rogue-space-combat-roguelike/fd4fd6dbf9a295515e51a34eeadcce503a2b1e77/orbit-rogue-logo.png" alt="" loading="lazy" decoding="async">
-                <span><img src="https://raw.githubusercontent.com/daning1212/orbit-rogue-space-combat-roguelike/7055da5/orbit-rogue-pilot-speed.png" alt="" loading="lazy" decoding="async"></span>
-              </div>
-              <div class="toy-copy"><h3>ORBIT ROGUE <small style="color:var(--accent)">v0.2.41</small></h3><p style="font-size:clamp(1rem,2.2vw,1.2rem);font-weight:700;line-height:1.45">광석을 모아 우주선을 키우는 슈팅 로그라이크</p></div>
-              <div style="display:grid;gap:6px;justify-items:center;text-align:center">
-                <a class="toy-play" href="https://rawcdn.githack.com/daning1212/orbit-rogue-space-combat-roguelike/8d59871c2b7283cde0df9b3a15ea930c020f46d2/index.html" target="_blank" rel="noopener noreferrer" aria-label="ORBIT ROGUE 플레이">PLAY ↗</a>
-                <small style="font-size:12px;color:var(--muted)">모바일 플레이 가능 · PC 플레이 권장</small>
-                <a href="https://github.com/daning1212/orbit-rogue-space-combat-roguelike/archive/8d59871c2b7283cde0df9b3a15ea930c020f46d2.zip" aria-label="ORBIT ROGUE 게임 ZIP 다운로드" style="font-size:11px;color:var(--muted);white-space:nowrap">다운로드 ↓</a>
-              </div>
-            </article>
-            <article class="toy-card">
-              <div class="toy-preview toy-preview-jongbu" aria-hidden="true">
-                <b lang="ko-Hani">終簿</b>
-              </div>
-              <div class="toy-copy">
-                <h3>마지막 출석부 <span class="toy-demo">DEMO</span></h3>
-                <p>죽은 친구의 마지막 날을 거슬러 올라가는 레트로 텍스트 추리 어드벤처.</p>
-              </div>
-              <a class="toy-play" href="https://healingarty-jongbu-demo.sadwar1001.chatgpt.site" target="_blank" rel="noopener noreferrer" aria-label="마지막 출석부 종부 데모 플레이">PLAY ↗</a>
-            </article>
-          </div>
-        </section>
         <div class="tool-group" id="tools-research">
           <div class="tool-group-heading"><div><h3>연구 프로젝트</h3></div><p>아이디어를 코드와 기록으로.</p></div>
           <table class="tool-table"><caption class="visually-hidden">연구 프로젝트 프로그램 목록</caption><thead><tr><th scope="col">프로그램</th><th scope="col">어떤 도구인가요?</th><th scope="col">사용 · 소스</th></tr></thead><tbody>
@@ -181,6 +131,74 @@
           </tbody></table>
         </div>
         <div class="tools-footer"><p>필요해서 만들고, 함께 쓰기 위해 나눕니다.</p><a class="text-link" href="https://github.com/daning1212?tab=repositories" target="_blank" rel="noopener noreferrer">모든 저장소 보기 ↗</a></div>
+      </div>
+    </section>
+    <section class="digital-toys" id="games" aria-labelledby="games-title">
+      <div class="container">
+        <div class="section-heading">
+          <h2 id="games-title"><em>게임</em></h2>
+          <p>브라우저에서 바로 플레이할 수 있는 게임.</p>
+        </div>
+        <div class="toy-grid">
+          <article class="toy-card toy-card-orbit">
+            <div class="toy-preview toy-preview-orbit" aria-hidden="true">
+              <img class="toy-orbit-logo" src="https://raw.githubusercontent.com/daning1212/orbit-rogue-space-combat-roguelike/fd4fd6dbf9a295515e51a34eeadcce503a2b1e77/orbit-rogue-logo.png" alt="" loading="lazy" decoding="async">
+              <span><img src="https://raw.githubusercontent.com/daning1212/orbit-rogue-space-combat-roguelike/7055da5/orbit-rogue-pilot-speed.png" alt="" loading="lazy" decoding="async"></span>
+            </div>
+            <div class="toy-copy"><h3>ORBIT ROGUE <small style="color:var(--accent)">v0.2.41</small></h3><p style="font-size:clamp(1rem,2.2vw,1.2rem);font-weight:700;line-height:1.45">광석을 모아 우주선을 키우는 슈팅 로그라이크</p></div>
+            <div class="toy-actions">
+              <a class="toy-play" href="https://rawcdn.githack.com/daning1212/orbit-rogue-space-combat-roguelike/8d59871c2b7283cde0df9b3a15ea930c020f46d2/index.html" target="_blank" rel="noopener noreferrer" aria-label="ORBIT ROGUE 플레이">PLAY ↗</a>
+              <button class="toy-copy-link" type="button" aria-live="polite">링크 복사</button>
+              <small style="font-size:12px;color:var(--muted)">모바일 플레이 가능 · PC 플레이 권장</small>
+              <a href="https://github.com/daning1212/orbit-rogue-space-combat-roguelike/archive/8d59871c2b7283cde0df9b3a15ea930c020f46d2.zip" aria-label="ORBIT ROGUE 게임 ZIP 다운로드" style="font-size:11px;color:var(--muted);white-space:nowrap">다운로드 ↓</a>
+            </div>
+          </article>
+          <article class="toy-card">
+            <div class="toy-preview toy-preview-jongbu" aria-hidden="true">
+              <b lang="ko-Hani">終簿</b>
+            </div>
+            <div class="toy-copy">
+              <h3>마지막 출석부 <span class="toy-demo">DEMO</span></h3>
+              <p>죽은 친구의 마지막 날을 거슬러 올라가는 레트로 텍스트 추리 어드벤처.</p>
+            </div>
+            <div class="toy-actions">
+              <a class="toy-play" href="https://healingarty-jongbu-demo.sadwar1001.chatgpt.site" target="_blank" rel="noopener noreferrer" aria-label="마지막 출석부 종부 데모 플레이">PLAY ↗</a>
+              <button class="toy-copy-link" type="button" aria-live="polite">링크 복사</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="digital-toys" id="digital-toys" aria-labelledby="digital-toys-title">
+      <div class="container">
+        <div class="section-heading">
+          <h2 id="digital-toys-title"><em>디지털</em> 토이</h2>
+          <p>재미로 만든 작은 브라우저 장난감.<br>PC에서는 PLAY를 누른 뒤 <kbd>F11</kbd>로 전체 화면을 켜보세요.</p>
+        </div>
+        <div class="toy-grid">
+          <article class="toy-card">
+            <div class="toy-preview toy-preview-artex" aria-hidden="true">
+              <b>ARTEX / WORKSHOP</b><div class="toy-agents"><span>✦</span><span>◈</span><span>✳</span></div>
+            </div>
+            <div class="toy-copy"><h3>ARTEX</h3><p>친구 앞에서 에이전트 팀을 능숙하게 지휘하는 척해 보세요. 작업 하나 던져주면 가상 에이전트들이 알아서 움직여요.</p></div>
+            <div class="toy-actions">
+              <a class="toy-play" href="toys/artex.html" target="_blank" rel="noopener noreferrer" aria-label="ARTEX 플레이">PLAY ↗</a>
+              <button class="toy-copy-link" type="button" aria-live="polite">링크 복사</button>
+              <a href="toys/artex.html" download="ARTEX-V2.html" aria-label="ARTEX HTML 다운로드" style="font-size:11px;color:var(--muted);white-space:nowrap">다운로드 ↓</a>
+            </div>
+          </article>
+          <article class="toy-card">
+            <div class="toy-preview toy-preview-picox" aria-hidden="true">
+              <b>PICOX / CONSOLE</b><span>[INIT] NODE ONLINE</span><span>[SYNC] MOCK LEDGER</span><span>&gt; <i></i></span>
+            </div>
+            <div class="toy-copy"><h3>PICOX</h3><p>녹색 로그를 띄우고 친구 앞에서 영화 속 해커처럼 연기해 보세요. 화면에 흐르는 건 전부 가상 로그예요.</p></div>
+            <div class="toy-actions">
+              <a class="toy-play" href="toys/picox.html" target="_blank" rel="noopener noreferrer" aria-label="PICOX 플레이">PLAY ↗</a>
+              <button class="toy-copy-link" type="button" aria-live="polite">링크 복사</button>
+              <a href="toys/picox.html" download="PICOX-Demo-Console.html" aria-label="PICOX HTML 다운로드" style="font-size:11px;color:var(--muted);white-space:nowrap">다운로드 ↓</a>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
     <section class="container workshop-stack" aria-labelledby="stack-title">

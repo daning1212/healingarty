@@ -149,6 +149,9 @@
 .toy-demo{display:inline-block;margin-inline-start:3px;padding:2px 4px;border:1px solid #98645d;border-radius:3px;color:#ffb8aa;font:700 10px/1.15 ui-monospace,monospace;vertical-align:middle}
 .toy-play{background:var(--accent);color:var(--bg);padding:6px 9px;border-radius:5px;font-size:11px;font-weight:750;white-space:nowrap}
 .toy-play:hover{background:#e6f7ad}
+.toy-actions{display:grid;gap:6px;justify-items:center;text-align:center}
+.toy-copy-link{border:1px solid var(--line);background:transparent;color:var(--text,var(--muted));border-radius:5px;padding:5px 7px;font:inherit;font-size:11px;white-space:nowrap;cursor:pointer}
+.toy-copy-link:hover{border-color:var(--accent);color:var(--accent)}
 @media(max-width:880px){.toy-grid{grid-template-columns:1fr}}
 @media(max-width:420px){.toy-card{grid-template-columns:82px minmax(0,1fr) auto;gap:8px;padding:8px}.toy-preview{padding-inline:4px;font-size:6px}.toy-play{padding-inline:6px}}
 

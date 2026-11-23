@@ -65,3 +65,18 @@ document.querySelectorAll('.featured-thumb[data-youtube-id]').forEach((link) => 
     dialog.showModal();
   });
 });
+
+document.querySelectorAll('.toy-copy-link').forEach((button) => {
+  const playUrl = button.closest('.toy-actions').querySelector('.toy-play').href;
+  let resetLabel;
+  button.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(playUrl);
+      clearTimeout(resetLabel);
+      button.textContent = '복사 완료';
+      resetLabel = setTimeout(() => { button.textContent = '링크 복사'; }, 1800);
+    } catch {
+      window.prompt('아래 플레이 링크를 복사하세요.', playUrl);
+    }
+  });
+});
