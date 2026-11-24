@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ORBIT ROGUE · 전투 OST</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:#090f1d;color:#ecf6ff;font:16px system-ui,sans-serif}
+    main{width:min(100%,480px);min-width:0;padding:clamp(16px,5vw,32px);border:1px solid #36536a;border-radius:14px;background:#101e31}
+    h1{font-size:clamp(24px,6vw,36px);margin:0 0 6px}
+    p{margin:0 0 24px;color:#afc7dc}
+    label{display:grid;gap:7px}
+    select{width:100%;min-height:44px;border:1px solid #507393;border-radius:7px;padding:8px;background:#0b1729;color:inherit;font:inherit}
+    audio{display:block;width:100%;margin:16px 0}
+    a{color:#80e5ff}
+    #status:empty{display:none}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>ORBIT ROGUE</h1>
+    <p>전투 OST · 37곡</p>
+    <label for="track">곡 선택
+      <select id="track">
+        <option value="01">01 · 검은리본</option>
+        <option value="02">02 · 고장 난 천국</option>
+        <option value="03">03 · 네온사탕</option>
+        <option value="04">04 · 달빛엔진</option>
+        <option value="05">05 · 로그아웃</option>
+        <option value="06">06 · 발간운동화</option>
+        <option value="07">07 · 번개맛소다</option>
+        <option value="08">08 · 별을 씹는 아이</option>
+        <option value="09">09 · 불꽃도둑</option>
+        <option value="10">10 · 심장이두개</option>
+        <option value="11">11 · 夜明けの 残像</option>
+        <option value="12">12 · 逆転ロケット</option>
+        <option value="13">13 · 電光キャンディ</option>
+        <option value="14">14 · 止まらない</option>
+        <option value="15">15 · 爆走プリンセス</option>
+        <option value="16">16 · 하얀 잔상</option>
+        <option value="17">17 · 嘘の羽根</option>
+        <option value="18">18 · CRASH THE RAINBOW</option>
+        <option value="19">19 · ELECTRIC WITCH</option>
+        <option value="20">20 · FINAL SPARK PARADE</option>
+        <option value="21">21 · Flash! Bang!</option>
+        <option value="22">22 · HYPER HEART ATTACK</option>
+        <option value="23">23 · MIDNIGHT DETONATION</option>
+        <option value="24">24 · NEON REBELLION</option>
+        <option value="25">25 · PINK THUNDER</option>
+        <option value="26">26 · REDLINE KISS</option>
+        <option value="27">27 · ROCKET HEART DISCO</option>
+        <option value="28">28 · the trigger</option>
+        <option value="29">29 · TURBO LOLLIPOP</option>
+        <option value="30">30 · ZERO GRAVITY GIRL</option>
+        <option value="31">31 · イナズマ・ルーレット</option>
+        <option value="32">32 · ギザギザ・ハートビート</option>
+        <option value="33">33 · キラキラ反逆者</option>
+        <option value="34">34 · ドキドキ・マシンガン</option>
+        <option value="35">35 · バチバチ・サマー</option>
+        <option value="36">36 · ピカピカ・パニック</option>
+        <option value="37">37 · メロンソーダ戦争</option>
+      </select>
+    </label>
+    <audio id="player" controls preload="none" aria-label="전투 OST 재생기"></audio>
+    <p id="status" role="status"></p>
+    <a href="../#games">HealingArty 게임으로 돌아가기 ↗</a>
+  </main>
+  <script>
+    const track = document.querySelector('#track');
+    const player = document.querySelector('#player');
+    const status = document.querySelector('#status');
+    const musicBase = 'https://raw.githubusercontent.com/daning1212/orbit-rogue-space-combat-roguelike/bb71b910c6db7b978ec3b8956570c5e00a76ec4d/music/';
+    function selectTrack() {
+      status.textContent = '';
+      player.src = musicBase + track.value + '.mp3';
+    }
+    track.addEventListener('change', () => {
+      selectTrack();
+      player.play().catch(() => {});
+    });
+    player.addEventListener('error', () => {
+      status.textContent = '음원을 불러오지 못했어요. 곡을 다시 선택해 주세요.';
+    });
+    selectTrack();
+  </script>
+</body>
+</html>
