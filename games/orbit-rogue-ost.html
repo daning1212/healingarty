@@ -10,9 +10,16 @@
     main{width:min(100%,480px);min-width:0;padding:clamp(16px,5vw,32px);border:1px solid #36536a;border-radius:14px;background:#101e31}
     h1{font-size:clamp(24px,6vw,36px);margin:0 0 6px}
     p{margin:0 0 24px;color:#afc7dc}
-    .player-bar{display:flex;align-items:center;gap:4px;min-width:0}
+    .player-bar{display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;margin-top:10px}
     button{min-height:36px;padding:4px 6px;border:1px solid #507393;border-radius:6px;background:#0b1729;color:inherit;font:inherit;white-space:nowrap;cursor:pointer}
-    #title{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}
+    #title{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px;padding:8px 7px;border:1px solid #507393;border-radius:6px;background:#19344b;color:#e9f9ff}
+    .waveform{display:flex;justify-content:center;align-items:center;gap:4px;height:62px;margin-bottom:10px;border:1px solid #36536a;border-radius:8px;background:#0b1729}
+    .waveform i{width:2px;height:var(--height);border-radius:2px;background:#80e5ff;animation:wave .95s ease-in-out var(--delay) infinite alternate;animation-play-state:paused}
+    .playing .waveform i{animation-play-state:running}
+    @keyframes wave{from{transform:scaleY(.45)}to{transform:scaleY(1)}}
+    @media(prefers-reduced-motion:reduce){.waveform i{animation:none}}
+    .timeline{display:flex;align-items:center;gap:7px;margin-top:8px;font-size:11px;color:#afc7dc;font-variant-numeric:tabular-nums}
+    #seek{flex:1;min-width:0;margin:0;accent-color:#80e5ff}
     #mode{font-size:11px}
     #volume{width:clamp(39px,16vw,75px);margin:0;accent-color:#80e5ff}
     a{color:#80e5ff}
@@ -29,15 +36,41 @@
   <main>
     <h1>ORBIT ROGUE</h1>
     <p class="intro">OST · 40곡</p>
+    <div class="waveform" aria-hidden="true">
+      <i style="--height:9px;--delay:-0.00s"></i>
+      <i style="--height:15px;--delay:-0.17s"></i>
+      <i style="--height:12px;--delay:-0.34s"></i>
+      <i style="--height:21px;--delay:-0.51s"></i>
+      <i style="--height:17px;--delay:-0.68s"></i>
+      <i style="--height:28px;--delay:-0.85s"></i>
+      <i style="--height:22px;--delay:-0.12s"></i>
+      <i style="--height:34px;--delay:-0.29s"></i>
+      <i style="--height:23px;--delay:-0.46s"></i>
+      <i style="--height:39px;--delay:-0.63s"></i>
+      <i style="--height:28px;--delay:-0.80s"></i>
+      <i style="--height:34px;--delay:-0.07s"></i>
+      <i style="--height:18px;--delay:-0.24s"></i>
+      <i style="--height:27px;--delay:-0.41s"></i>
+      <i style="--height:14px;--delay:-0.58s"></i>
+      <i style="--height:23px;--delay:-0.75s"></i>
+      <i style="--height:18px;--delay:-0.02s"></i>
+      <i style="--height:13px;--delay:-0.19s"></i>
+      <i style="--height:8px;--delay:-0.36s"></i>
+    </div>
+    <span id="title" aria-live="polite"></span>
+    <div class="timeline">
+      <span id="elapsed">0:00</span>
+      <input type="range" id="seek" min="0" max="1" step="0.01" value="0" aria-label="재생 위치" disabled>
+      <span id="duration">--:--</span>
+    </div>
     <div class="player-bar" role="group" aria-label="ORBIT ROGUE 음악 재생기">
       <button id="previous" type="button" aria-label="이전 곡">‹</button>
       <button id="toggle" type="button" aria-label="재생">▶</button>
-      <span id="title" aria-live="polite"></span>
       <button id="next" type="button" aria-label="다음 곡">›</button>
       <button id="mode" type="button" aria-label="랜덤 재생" aria-pressed="false">순서</button>
       <input type="range" id="volume" min="0" max="100" value="65" aria-label="음량">
     </div>
-    <audio id="player" preload="none"></audio>
+    <audio id="player" preload="metadata"></audio>
     <p id="status" role="status"></p>
     <a class="back" href="../#games">HealingArty 게임으로 돌아가기 ↗</a>
   </main>
@@ -88,6 +121,28 @@
     const get = id => document.getElementById(id);
     const player = get('player'), title = get('title'), toggle = get('toggle'), mode = get('mode'), status = get('status');
     let index = 0, random = false;
+    const seek = get('seek'), elapsed = get('elapsed'), duration = get('duration');
+    function formatTime(seconds) {
+      const whole = Math.floor(seconds);
+      return Math.floor(whole / 60) + ':' + String(whole % 60).padStart(2, '0');
+    }
+    function syncTimeline() {
+      const ready = Number.isFinite(player.duration) && player.duration > 0;
+      seek.disabled = !ready;
+      seek.max = ready ? player.duration : 1;
+      seek.value = ready ? player.currentTime : 0;
+      elapsed.textContent = formatTime(ready ? player.currentTime : 0);
+      duration.textContent = ready ? formatTime(player.duration) : '--:--';
+      seek.setAttribute('aria-valuetext', elapsed.textContent + ' / ' + duration.textContent);
+    }
+    for (const event of ['emptied', 'durationchange', 'timeupdate', 'seeked']) {
+      player.addEventListener(event, syncTimeline);
+    }
+    seek.addEventListener('input', () => {
+      if (seek.disabled) return;
+      player.currentTime = Number(seek.value);
+      syncTimeline();
+    });
     function selectTrack(next) {
       index = (next + tracks.length) % tracks.length;
       const [file, name] = tracks[index];
@@ -102,9 +157,10 @@
     get('previous').onclick = () => { selectTrack(index - 1); play(); };
     get('next').onclick = () => { selectTrack(index + 1); play(); };
     toggle.onclick = () => { if (player.paused) play(); else player.pause(); };
-    for (const event of ['play', 'pause', 'ended']) {
+    for (const event of ['play', 'playing', 'waiting', 'pause', 'ended', 'emptied', 'error']) {
       player.addEventListener(event, () => {
         const playing = !player.paused && !player.ended;
+        document.querySelector('main').classList.toggle('playing', playing && player.readyState >= 3);
         toggle.textContent = playing ? '❚❚' : '▶';
         toggle.setAttribute('aria-label', playing ? '일시정지' : '재생');
       });
